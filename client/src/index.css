@@ -98,7 +98,7 @@
   
   @keyframes cursor-blink {
     0%, 100% { border-color: transparent; }
-    50% { border-color: theme('colors.primary.DEFAULT'); }
+    50% { border-color: #6c63ff; }  /* Primary color directly */
   }
   
   /* Custom scrollbar */
@@ -107,16 +107,16 @@
   }
   
   .custom-scrollbar::-webkit-scrollbar-track {
-    background: theme('colors.dark.DEFAULT');
+    background: #131722;  /* Dark color directly instead of theme reference */
   }
   
   .custom-scrollbar::-webkit-scrollbar-thumb {
-    background: theme('colors.primary.DEFAULT');
+    background: #6c63ff;  /* Primary color directly instead of theme reference */
     border-radius: 5px;
   }
   
   .custom-scrollbar::-webkit-scrollbar-thumb:hover {
-    background: theme('colors.secondary.DEFAULT');
+    background: #ff6584;  /* Secondary color directly instead of theme reference */
   }
   
   /* Custom cursor */
@@ -126,7 +126,7 @@
     height: 20px;
     border-radius: 50%;
     background-color: transparent;
-    border: 2px solid theme('colors.primary.DEFAULT');
+    border: 2px solid #6c63ff;  /* Primary color directly */
     pointer-events: none;
     transform: translate(-50%, -50%);
     transition: width 0.3s, height 0.3s, background-color 0.3s;
@@ -184,6 +184,6 @@
   }
   
   .bg-gradient-overlay {
-    background: linear-gradient(to bottom, transparent, theme('colors.dark.DEFAULT') 90%);
+    background: linear-gradient(to bottom, transparent, #131722 90%);  /* Dark color directly */
   }
 }
