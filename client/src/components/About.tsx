@@ -1,4 +1,5 @@
 import { useEffect, useRef } from "react";
+import gsap from "gsap";
 
 const About = () => {
   const skillsRef = useRef<HTMLDivElement>(null);

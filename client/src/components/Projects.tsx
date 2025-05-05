@@ -1,5 +1,6 @@
 import { useState, useEffect, useRef } from "react";
 import { fetchGitHubProjects } from "@/lib/utils";
+import gsap from "gsap";
 
 type Project = {
   id: number;
