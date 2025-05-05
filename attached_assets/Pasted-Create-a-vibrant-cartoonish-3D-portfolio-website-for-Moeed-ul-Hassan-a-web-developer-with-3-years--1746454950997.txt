@@ -1,0 +1,432 @@
+Create a vibrant, cartoonish 3D portfolio website for Moeed-ul-Hassan, a web developer with 3 years of experience, showcasing their skills, projects, and personality. The website should use GSAP for animations, Three.js for 3D rendering, and Vite as the build tool. The design should be playful, with a low-poly 3D model and smooth, engaging animations, reflecting a modern and creative vibe.
+
+Developer Background
+
+
+
+
+
+Experience: 3 years as a web developer, proficient in JavaScript, HTML, CSS, and modern frameworks.
+
+
+
+GitHub: https://github.com/Moeed-ul-Hassan
+
+
+
+Preferences: Wants a "cartoonish 3D model type" and a "full animated website" with a "Vibe Coded" aesthetic.
+
+Requirements
+
+General
+
+
+
+
+
+Build a single-page application (SPA) with a responsive, mobile-friendly design.
+
+
+
+Use Vite for a fast development setup and modern JavaScript (ES modules).
+
+
+
+Incorporate Tailwind CSS for styling to ensure a clean, playful, and consistent look.
+
+
+
+Ensure the website is performant, with optimized 3D rendering and animations.
+
+
+
+Host the site as a static HTML/JS/CSS application, deployable on platforms like Netlify or Vercel.
+
+Design and Aesthetic
+
+
+
+
+
+Theme: Cartoonish, vibrant, and playful, with a low-poly 3D model (e.g., a stylized avatar or object) as the centerpiece.
+
+
+
+Colors: Bright, saturated colors (e.g., blues, purples, pinks) with smooth gradients for backgrounds.
+
+
+
+Typography: Use playful fonts like Comic Sans MS or similar (e.g., Open Sans with bold weights) for headings and body text.
+
+
+
+Layout: Full-screen sections for Hero, About, Projects, and Contact, with smooth scrolling and GSAP animations.
+
+3D Model and Three.js
+
+
+
+
+
+3D Model:
+
+
+
+
+
+Use a low-poly, cartoonish GLTF model (e.g., a character, animal, or object) sourced from a free platform like Sketchfab or created in Blender.
+
+
+
+Ensure the model has vibrant textures and simple animations (e.g., idle rotation, bounce, or wave).
+
+
+
+Size the model appropriately for the hero section (e.g., 400x400px canvas).
+
+
+
+Three.js Setup:
+
+
+
+
+
+Create a Three.js scene with a WebGL renderer, perspective camera, and ambient/directional lighting for a soft, cartoonish effect.
+
+
+
+Add OrbitControls for optional user interaction (e.g., rotate the model).
+
+
+
+Optimize rendering with techniques like model compression and efficient shaders.
+
+
+
+Animate the model subtly using Three.js (e.g., rotate on Y-axis) or GSAP for position/scale tweaks.
+
+GSAP Animations
+
+
+
+
+
+Hero Section:
+
+
+
+
+
+Animate the 3D model’s entrance (e.g., scale up with a bounce effect using GSAP’s elastic.out).
+
+
+
+Fade in the title and subtitle with a stagger effect.
+
+
+
+Section Transitions:
+
+
+
+
+
+Use GSAP’s ScrollTrigger to animate sections as they enter the viewport (e.g., slide in, fade up).
+
+
+
+Apply playful effects like rotation, scale, or bounce for project cards and text.
+
+
+
+Micro-Interactions:
+
+
+
+
+
+Add hover effects on project cards (e.g., scale up, color shift).
+
+
+
+Animate button clicks (e.g., squash and stretch).
+
+
+
+Timeline:
+
+
+
+
+
+Create a master GSAP timeline for the page load, chaining animations for a cohesive feel.
+
+Sections
+
+
+
+
+
+Hero Section:
+
+
+
+
+
+Full-screen section with the 3D model centered in a canvas.
+
+
+
+Display your name ("Moeed-ul-Hassan") and a tagline (e.g., "Web Developer with a Passion for 3D & Animation").
+
+
+
+Include a CTA button (e.g., “Explore My Work”) that scrolls to the Projects section.
+
+
+
+About Section:
+
+
+
+
+
+Brief bio highlighting your 3 years of experience and love for interactive web development.
+
+
+
+Link to your GitHub (https://github.com/Moeed-ul-Hassan).
+
+
+
+Animate text and any decorative elements (e.g., icons) with GSAP.
+
+
+
+Projects Section:
+
+
+
+
+
+Display 3–6 projects, ideally pulled dynamically from your GitHub repositories using the GitHub API.
+
+
+
+Each project card should include the project name, a short description, and a link to the repo.
+
+
+
+Use GSAP to animate cards (e.g., stagger fade-in, hover scale).
+
+
+
+Fallback to static project data if API integration is complex.
+
+
+
+Contact Section:
+
+
+
+
+
+Include a simple contact form (name, email, message) or links to email and socials (e.g., GitHub, LinkedIn).
+
+
+
+Animate form fields or social icons with GSAP (e.g., pop-in effect).
+
+
+
+Ensure form submission is handled via a service like Formspree (no backend required).
+
+Technical Details
+
+
+
+
+
+Dependencies:
+
+
+
+
+
+Three.js (via CDN or npm) for 3D rendering.
+
+
+
+GSAP (via CDN or npm) for animations, including ScrollTrigger plugin.
+
+
+
+Tailwind CSS (via CDN or npm) for styling.
+
+
+
+Vite as the build tool for bundling and development.
+
+
+
+File Structure (suggested for Vite):
+
+/portfolio
+├── /src
+│   ├── /assets
+│   │   └── model.gltf  # 3D model file
+│   ├── /css
+│   │   └── main.css   # Tailwind styles
+│   ├── /js
+│   │   ├── main.js    # Three.js and GSAP logic
+│   │   ├── model.js   # 3D model setup
+│   │   └── animations.js # GSAP animations
+│   └── index.html     # Main HTML file
+├── vite.config.js     # Vite configuration
+├── package.json       # Dependencies and scripts
+└── tailwind.config.js # Tailwind configuration
+
+
+
+Performance:
+
+
+
+
+
+Compress the 3D model (use tools like gltf-pipeline).
+
+
+
+Limit draw calls in Three.js by simplifying the scene.
+
+
+
+Debounce scroll and resize events for GSAP animations.
+
+
+
+Use lazy-loading for images or additional assets.
+
+
+
+Accessibility:
+
+
+
+
+
+Ensure semantic HTML (e.g., <section>, <h1>, <nav>).
+
+
+
+Add ARIA labels for interactive elements.
+
+
+
+Test keyboard navigation for buttons and links.
+
+
+
+Provide alt text for decorative images (if any).
+
+Deliverables
+
+
+
+
+
+A fully functional Vite project with all source code (HTML, JS, CSS).
+
+
+
+A deployed version of the site (e.g., on Netlify, Vercel, or GitHub Pages).
+
+
+
+Documentation (README.md) explaining how to run the project locally, replace the 3D model, and customize animations.
+
+
+
+A list of free resources for cartoonish 3D models (e.g., Sketchfab, Kenney assets).
+
+Constraints
+
+
+
+
+
+Avoid complex backend setups; keep it static with optional API calls (e.g., GitHub API).
+
+
+
+Do not use frameworks like React unless explicitly requested (plain JS with Vite is preferred for simplicity).
+
+
+
+Ensure the 3D model file size is under 5MB for fast loading.
+
+
+
+Use free or open-source assets for the 3D model and textures.
+
+Success Criteria
+
+
+
+
+
+The website loads in under 3 seconds on a standard connection.
+
+
+
+The 3D model renders smoothly on mid-range devices (e.g., laptops, modern smartphones).
+
+
+
+GSAP animations are fluid and enhance the cartoonish vibe without overwhelming the user.
+
+
+
+The site reflects Moeed’s personality and skills, with clear links to their GitHub.
+
+
+
+The code is modular, well-commented, and easy to extend (e.g., adding new projects or animations).
+
+Notes
+
+
+
+
+
+For the 3D model, start with a free low-poly asset from Sketchfab (e.g., a cartoon character or object). Replace it later with a custom model if needed.
+
+
+
+Test animations across browsers (Chrome, Firefox, Safari) to ensure compatibility.
+
+
+
+If integrating the GitHub API, handle errors gracefully (e.g., fallback to static data if the API rate limit is hit).
+
+
+
+Consider adding a subtle background music toggle or sound effects for button clicks to enhance the playful vibe (optional, keep file sizes small).
+
+Example Inspirations
+
+
+
+
+
+Cartoonish 3D portfolio: https://bruno-simon.com/ (simplify the complexity).
+
+
+
+GSAP animations: https://www.awwwards.com/ (look for playful transitions).
+
+
+
+Low-poly models: Search Sketchfab for “low poly cartoon” or “stylized character”.
