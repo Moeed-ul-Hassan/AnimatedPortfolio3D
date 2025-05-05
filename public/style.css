@@ -898,15 +898,27 @@ p {
 
 .hero-3d {
     width: 100%;
-    max-width: 500px;
-    height: 400px;
+    max-width: 650px;
+    height: 550px;
     position: relative;
+    transition: transform 0.5s ease-in-out;
+}
+
+.hero-3d:hover {
+    transform: scale(1.05) translateY(-10px);
 }
 
 .canvas-container {
     width: 100%;
     height: 100%;
     position: relative;
+    filter: drop-shadow(0 30px 40px rgba(0, 0, 0, 0.25));
+    animation: float 6s ease-in-out infinite;
+}
+
+@keyframes float {
+    0%, 100% { transform: translateY(0px); }
+    50% { transform: translateY(-20px); }
 }
 
 #three-canvas {
@@ -916,6 +928,7 @@ p {
     width: 100%;
     height: 100%;
     border-radius: var(--border-radius-lg);
+    box-shadow: 0 0 30px rgba(108, 99, 255, 0.2);
 }
 
 .scroll-down {
