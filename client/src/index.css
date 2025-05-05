@@ -1,0 +1,102 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --background: 0 0% 7%;
+    --foreground: 0 0% 98%;
+    --primary: 245 61% 69%;
+    --primary-foreground: 0 0% 98%;
+    --secondary: 351 100% 70%;
+    --secondary-foreground: 0 0% 98%;
+    --accent: 165 57% 55%;
+    --accent-foreground: 0 0% 98%;
+    --muted: 240 5% 12%;
+    --muted-foreground: 0 0% 70%;
+    --border: 240 5% 26%;
+    --input: 240 5% 12%;
+    --card: 240 5% 12%;
+    --card-foreground: 0 0% 98%;
+    --popover: 240 5% 12%;
+    --popover-foreground: 0 0% 98%;
+    --destructive: 0 100% 50%;
+    --destructive-foreground: 0 0% 98%;
+    --ring: 240 4.9% 83.9%;
+    --radius: 0.5rem;
+  }
+
+  * {
+    @apply border-border;
+  }
+
+  body {
+    @apply antialiased bg-background text-foreground overflow-x-hidden;
+    font-family: 'Open Sans', sans-serif;
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    font-family: 'Poppins', sans-serif;
+  }
+}
+
+@layer utilities {
+  .gradient-text {
+    @apply bg-gradient-to-r from-primary to-secondary bg-clip-text text-transparent;
+  }
+
+  .animate-float {
+    animation: float 3s ease-in-out infinite;
+  }
+
+  .animate-spin-slow {
+    animation: spin 8s linear infinite;
+  }
+
+  @keyframes float {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-20px); }
+  }
+
+  .canvas-container {
+    position: relative;
+    height: 60vh;
+  }
+  
+  .project-card {
+    @apply transition-all duration-300;
+  }
+  
+  .project-card:hover {
+    transform: translateY(-5px);
+    @apply shadow-lg shadow-primary/20;
+  }
+  
+  .section {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  
+  .navbar {
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+  }
+  
+  .skills-pill {
+    @apply transition-all duration-300;
+  }
+  
+  .skills-pill:hover {
+    transform: translateY(-2px) scale(1.05);
+  }
+
+  .cursor {
+    border-right: 3px solid;
+    animation: cursor-blink 1s step-end infinite;
+  }
+  
+  @keyframes cursor-blink {
+    0%, 100% { border-color: transparent; }
+    50% { border-color: theme('colors.primary.DEFAULT'); }
+  }
+}
