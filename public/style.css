@@ -2105,6 +2105,35 @@ p {
     background: linear-gradient(to right, var(--color-google-blue), var(--color-google-green));
 }
 
+/* Glow effect for progress bars after animation */
+.ms-interview .interview-progress.progress-glow {
+    box-shadow: 0 0 8px 2px rgba(0, 120, 212, 0.5);
+}
+
+.google-interview .interview-progress.progress-glow {
+    box-shadow: 0 0 8px 2px rgba(66, 133, 244, 0.5);
+}
+
+@keyframes pulse-progress {
+    0% { box-shadow: 0 0 8px 2px rgba(0, 120, 212, 0.3); }
+    50% { box-shadow: 0 0 12px 4px rgba(0, 120, 212, 0.5); }
+    100% { box-shadow: 0 0 8px 2px rgba(0, 120, 212, 0.3); }
+}
+
+.ms-interview .interview-progress.progress-glow {
+    animation: pulse-progress 2s infinite;
+}
+
+@keyframes pulse-progress-google {
+    0% { box-shadow: 0 0 8px 2px rgba(66, 133, 244, 0.3); }
+    50% { box-shadow: 0 0 12px 4px rgba(66, 133, 244, 0.5); }
+    100% { box-shadow: 0 0 8px 2px rgba(66, 133, 244, 0.3); }
+}
+
+.google-interview .interview-progress.progress-glow {
+    animation: pulse-progress-google 2s infinite;
+}
+
 .interview-topic p {
     margin: 0;
     font-size: 0.9rem;
