@@ -61,6 +61,7 @@
   .canvas-container {
     position: relative;
     height: 60vh;
+    min-height: 400px;
   }
   
   .project-card {
@@ -98,5 +99,91 @@
   @keyframes cursor-blink {
     0%, 100% { border-color: transparent; }
     50% { border-color: theme('colors.primary.DEFAULT'); }
+  }
+  
+  /* Custom scrollbar */
+  .custom-scrollbar::-webkit-scrollbar {
+    width: 10px;
+  }
+  
+  .custom-scrollbar::-webkit-scrollbar-track {
+    background: theme('colors.dark.DEFAULT');
+  }
+  
+  .custom-scrollbar::-webkit-scrollbar-thumb {
+    background: theme('colors.primary.DEFAULT');
+    border-radius: 5px;
+  }
+  
+  .custom-scrollbar::-webkit-scrollbar-thumb:hover {
+    background: theme('colors.secondary.DEFAULT');
+  }
+  
+  /* Custom cursor */
+  .custom-cursor {
+    position: fixed;
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    background-color: transparent;
+    border: 2px solid theme('colors.primary.DEFAULT');
+    pointer-events: none;
+    transform: translate(-50%, -50%);
+    transition: width 0.3s, height 0.3s, background-color 0.3s;
+    z-index: 9999;
+    mix-blend-mode: difference;
+  }
+  
+  a:hover ~ .custom-cursor,
+  button:hover ~ .custom-cursor {
+    width: 40px;
+    height: 40px;
+    background-color: rgba(108, 99, 255, 0.2);
+  }
+  
+  /* Animations for page elements */
+  @keyframes fadeInUp {
+    from {
+      opacity: 0;
+      transform: translateY(30px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+  
+  .animate-fadeInUp {
+    animation: fadeInUp 0.8s ease forwards;
+  }
+  
+  .animate-delay-100 {
+    animation-delay: 0.1s;
+  }
+  
+  .animate-delay-200 {
+    animation-delay: 0.2s;
+  }
+  
+  .animate-delay-300 {
+    animation-delay: 0.3s;
+  }
+  
+  .animate-delay-400 {
+    animation-delay: 0.4s;
+  }
+  
+  .animate-delay-500 {
+    animation-delay: 0.5s;
+  }
+  
+  /* Background patterns */
+  .bg-dot-pattern {
+    background-image: radial-gradient(circle, rgba(255, 255, 255, 0.1) 1px, transparent 1px);
+    background-size: 20px 20px;
+  }
+  
+  .bg-gradient-overlay {
+    background: linear-gradient(to bottom, transparent, theme('colors.dark.DEFAULT') 90%);
   }
 }

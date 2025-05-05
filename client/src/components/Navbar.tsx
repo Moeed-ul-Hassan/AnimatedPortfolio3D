@@ -35,10 +35,13 @@ const Navbar = () => {
             Moeed<span className="text-gray-200">.</span>
           </a>
           
-          <div className="hidden md:flex space-x-8">
+          <div className="hidden md:flex space-x-6">
             <a href="#home" onClick={() => handleNavClick("home")} className="hover:text-primary transition-colors duration-300">Home</a>
             <a href="#about" onClick={() => handleNavClick("about")} className="hover:text-primary transition-colors duration-300">About</a>
+            <a href="#skills" onClick={() => handleNavClick("skills")} className="hover:text-primary transition-colors duration-300">Skills</a>
+            <a href="#services" onClick={() => handleNavClick("services")} className="hover:text-primary transition-colors duration-300">Services</a>
             <a href="#projects" onClick={() => handleNavClick("projects")} className="hover:text-primary transition-colors duration-300">Projects</a>
+            <a href="#testimonials" onClick={() => handleNavClick("testimonials")} className="hover:text-primary transition-colors duration-300">Testimonials</a>
             <a href="#contact" onClick={() => handleNavClick("contact")} className="hover:text-primary transition-colors duration-300">Contact</a>
           </div>
           
@@ -52,7 +55,10 @@ const Navbar = () => {
           <div className="container mx-auto px-4 py-3 flex flex-col space-y-4">
             <a href="#home" onClick={() => handleNavClick("home")} className="hover:text-primary transition-colors duration-300">Home</a>
             <a href="#about" onClick={() => handleNavClick("about")} className="hover:text-primary transition-colors duration-300">About</a>
+            <a href="#skills" onClick={() => handleNavClick("skills")} className="hover:text-primary transition-colors duration-300">Skills</a>
+            <a href="#services" onClick={() => handleNavClick("services")} className="hover:text-primary transition-colors duration-300">Services</a>
             <a href="#projects" onClick={() => handleNavClick("projects")} className="hover:text-primary transition-colors duration-300">Projects</a>
+            <a href="#testimonials" onClick={() => handleNavClick("testimonials")} className="hover:text-primary transition-colors duration-300">Testimonials</a>
             <a href="#contact" onClick={() => handleNavClick("contact")} className="hover:text-primary transition-colors duration-300">Contact</a>
           </div>
         </div>

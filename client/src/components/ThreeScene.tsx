@@ -37,15 +37,14 @@ const ThreeScene = () => {
     camera.position.set(0, 1.5, 5);
     cameraRef.current = camera;
     
-    // Renderer setup
+    // Renderer setup - simplified for better performance
     const renderer = new THREE.WebGLRenderer({ 
-      antialias: true,
+      antialias: false, // Disable antialiasing for performance
       alpha: true 
     });
     renderer.setSize(canvasRef.current.clientWidth, canvasRef.current.clientHeight);
-    renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
-    renderer.shadowMap.enabled = true;
-    renderer.shadowMap.type = THREE.PCFSoftShadowMap;
+    renderer.setPixelRatio(1); // Set to 1 for better performance
+    renderer.shadowMap.enabled = false; // Disable shadows for performance
     canvasRef.current.appendChild(renderer.domElement);
     rendererRef.current = renderer;
     
@@ -168,47 +167,32 @@ const ThreeScene = () => {
     
     animate();
     
-    // Function to create a low-poly placeholder model
+    // Function to create a simple low-poly placeholder model for better performance
     function createPlaceholderModel() {
       // Create a group to hold our geometries
       const group = new THREE.Group();
       
-      // Create colorful cube
+      // Create colorful cube with basic materials for better performance
       const geometry = new THREE.BoxGeometry(1.5, 1.5, 1.5);
       const materials = [
-        new THREE.MeshStandardMaterial({ color: 0x6C63FF }),
-        new THREE.MeshStandardMaterial({ color: 0xFF6584 }),
-        new THREE.MeshStandardMaterial({ color: 0x44D7B6 }),
-        new THREE.MeshStandardMaterial({ color: 0xFFA6C3 }),
-        new THREE.MeshStandardMaterial({ color: 0x6C63FF }),
-        new THREE.MeshStandardMaterial({ color: 0xFF6584 })
+        new THREE.MeshBasicMaterial({ color: 0x6C63FF }),
+        new THREE.MeshBasicMaterial({ color: 0xFF6584 }),
+        new THREE.MeshBasicMaterial({ color: 0x44D7B6 }),
+        new THREE.MeshBasicMaterial({ color: 0xFFA6C3 }),
+        new THREE.MeshBasicMaterial({ color: 0x6C63FF }),
+        new THREE.MeshBasicMaterial({ color: 0xFF6584 })
       ];
       const cube = new THREE.Mesh(geometry, materials);
-      cube.castShadow = true;
-      cube.receiveShadow = true;
       
-      // Add decorative elements (sphere on top)
-      const sphereGeometry = new THREE.SphereGeometry(0.5, 16, 16);
-      const sphereMaterial = new THREE.MeshStandardMaterial({ 
-        color: 0x44D7B6,
-        metalness: 0.7,
-        roughness: 0.2 
-      });
+      // Add simple decorative element (smaller sphere on top)
+      const sphereGeometry = new THREE.SphereGeometry(0.5, 8, 8); // Reduced polygon count
+      const sphereMaterial = new THREE.MeshBasicMaterial({ color: 0x44D7B6 });
       const sphere = new THREE.Mesh(sphereGeometry, sphereMaterial);
-      sphere.position.y = 1.5;
-      sphere.castShadow = true;
+      sphere.position.y = 1.2;
       
-      // Create a base/stand
-      const baseGeometry = new THREE.CylinderGeometry(1, 1.2, 0.2, 8);
-      const baseMaterial = new THREE.MeshStandardMaterial({ color: 0x222222 });
-      const base = new THREE.Mesh(baseGeometry, baseMaterial);
-      base.position.y = -1;
-      base.receiveShadow = true;
-      
-      // Add all parts to the group
+      // Add both parts to the group
       group.add(cube);
       group.add(sphere);
-      group.add(base);
       
       return group;
     }
