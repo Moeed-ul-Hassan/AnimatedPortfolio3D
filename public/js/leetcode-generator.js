@@ -1,6 +1,70 @@
 // LeetCode Problem Generator
 // Data based on common interview questions at Microsoft and Google
 
+// Database of code solutions by language
+const codeSolutions = {
+    // Sample solutions for Two Sum problem
+    1: {
+        javascript: `function twoSum(nums, target) {
+    const map = new Map();
+    for (let i = 0; i < nums.length; i++) {
+        const complement = target - nums[i];
+        if (map.has(complement)) {
+            return [map.get(complement), i];
+        }
+        map.set(nums[i], i);
+    }
+    return null;
+}`,
+        python: `def twoSum(nums, target):
+    numMap = {}
+    for i, num in enumerate(nums):
+        complement = target - num
+        if complement in numMap:
+            return [numMap[complement], i]
+        numMap[num] = i
+    return []`,
+        java: `public int[] twoSum(int[] nums, int target) {
+    Map<Integer, Integer> map = new HashMap<>();
+    for (int i = 0; i < nums.length; i++) {
+        int complement = target - nums[i];
+        if (map.containsKey(complement)) {
+            return new int[] { map.get(complement), i };
+        }
+        map.put(nums[i], i);
+    }
+    throw new IllegalArgumentException("No solution");
+}`,
+        csharp: `public int[] TwoSum(int[] nums, int target) {
+    Dictionary<int, int> map = new Dictionary<int, int>();
+    for (int i = 0; i < nums.Length; i++) {
+        int complement = target - nums[i];
+        if (map.ContainsKey(complement)) {
+            return new int[] { map[complement], i };
+        }
+        map[nums[i]] = i;
+    }
+    throw new ArgumentException("No solution");
+}`,
+        cpp: `vector<int> twoSum(vector<int>& nums, int target) {
+    unordered_map<int, int> map;
+    for (int i = 0; i < nums.size(); i++) {
+        int complement = target - nums[i];
+        if (map.find(complement) != map.end()) {
+            return {map[complement], i};
+        }
+        map[nums[i]] = i;
+    }
+    return {};
+}`
+    },
+    // Add more solutions for other problems as needed
+    // The key is the problem ID, which matches the leetcodeProblems array
+};
+
+// Set default language
+let currentLanguage = 'javascript';
+
 // Database of LeetCode problems by difficulty
 const leetcodeProblems = {
     easy: [
@@ -282,6 +346,56 @@ function displayProblem(problem) {
     // Get difficulty class
     const difficultyClass = problem.difficulty.toLowerCase();
     
+    // Check if code solutions exist for this problem
+    const hasSolution = codeSolutions[problem.id] !== undefined;
+    
+    // Get solution in current language if available
+    let codeSolution = '';
+    if (hasSolution) {
+        if (codeSolutions[problem.id][currentLanguage]) {
+            codeSolution = codeSolutions[problem.id][currentLanguage];
+        } else {
+            // If current language not available, default to JavaScript
+            codeSolution = codeSolutions[problem.id]['javascript'] || '';
+            currentLanguage = 'javascript';
+        }
+    }
+    
+    // Create language selector if solutions exist
+    let languageSelector = '';
+    if (hasSolution) {
+        const languages = Object.keys(codeSolutions[problem.id]);
+        languageSelector = `
+            <div class="language-selector-container">
+                <label for="language-selector">Solution Language:</label>
+                <select id="language-selector" onchange="changeLanguage(this.value, ${problem.id})">
+                    ${languages.map(lang => `
+                        <option value="${lang}" ${lang === currentLanguage ? 'selected' : ''}>
+                            ${lang.charAt(0).toUpperCase() + lang.slice(1)}
+                        </option>
+                    `).join('')}
+                </select>
+            </div>
+        `;
+    }
+    
+    // Create solution section if available
+    let solutionSection = '';
+    if (hasSolution) {
+        solutionSection = `
+            <div class="problem-solution">
+                <div class="solution-header">
+                    <h4>Solution Example:</h4>
+                    ${languageSelector}
+                </div>
+                <pre class="code-block ${currentLanguage}"><code>${codeSolution}</code></pre>
+                <div class="solution-note">
+                    <p><i class="fas fa-info-circle"></i> Note: This is just one approach. There may be multiple ways to solve this problem.</p>
+                </div>
+            </div>
+        `;
+    }
+    
     // Build HTML
     const problemHTML = `
         <div class="problem-card">
@@ -306,6 +420,8 @@ function displayProblem(problem) {
                 <pre>${formattedExample}</pre>
             </div>
             
+            ${solutionSection}
+            
             <div class="problem-tags">
                 ${tagBadges}
             </div>
@@ -322,6 +438,24 @@ function displayProblem(problem) {
     `;
     
     document.getElementById('leetcode-problem').innerHTML = problemHTML;
+}
+
+// Function to change code language
+function changeLanguage(language, problemId) {
+    if (codeSolutions[problemId] && codeSolutions[problemId][language]) {
+        currentLanguage = language;
+        const solution = codeSolutions[problemId][language];
+        
+        // Update only the code block to avoid reloading the entire problem
+        const codeBlock = document.querySelector('.code-block');
+        if (codeBlock) {
+            // Update language class
+            codeBlock.className = `code-block ${language}`;
+            
+            // Update code content
+            codeBlock.querySelector('code').textContent = solution;
+        }
+    }
 }
 
 // Track current difficulty
