@@ -17,33 +17,17 @@ export async function registerRoutes(app: Express): Promise<Server> {
     });
   });
 
-  // Serve static files from the public directory
-  app.use('/static', express.static(path.resolve(process.cwd(), 'public')));
+  // Serve all static files directly from the public directory
+  app.use(express.static(path.resolve(process.cwd(), 'public')));
   
-  // Redirect root to the portfolio page
+  // Redirect root to the portfolio 
   app.get('/', (req, res) => {
-    res.redirect('/portfolio');
-  });
-  
-  // Serve the portfolio site
-  app.get('/portfolio', (req, res) => {
     res.sendFile(path.resolve(process.cwd(), 'public/index.html'));
   });
   
-  // Serve other static assets requested through the portfolio path
-  app.get('/portfolio/*', (req, res) => {
-    const requestedPath = req.path.replace('/portfolio/', '');
-    const filePath = path.resolve(process.cwd(), 'public', requestedPath);
-    
-    try {
-      if (fs.existsSync(filePath) && !fs.statSync(filePath).isDirectory()) {
-        return res.sendFile(filePath);
-      } else {
-        return res.status(404).send('File not found');
-      }
-    } catch (err) {
-      return res.status(500).send('Server error');
-    }
+  // Any other route - fallback to index.html for client-side routing
+  app.get('*', (req, res) => {
+    res.sendFile(path.resolve(process.cwd(), 'public/index.html'));
   });
 
   const httpServer = createServer(app);

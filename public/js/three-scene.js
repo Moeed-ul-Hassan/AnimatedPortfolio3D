@@ -50,7 +50,7 @@ document.addEventListener('DOMContentLoaded', function() {
         
         // Create a texture from the profile image
         const textureLoader = new THREE.TextureLoader();
-        textureLoader.load('assets/profile.jpg', function(texture) {
+        textureLoader.load('/assets/profile.jpg', function(texture) {
             const materials = [
                 new THREE.MeshStandardMaterial({ color: 0x6c63ff }), // Right side
                 new THREE.MeshStandardMaterial({ color: 0x6c63ff }), // Left side
