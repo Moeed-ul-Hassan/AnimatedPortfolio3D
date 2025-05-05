@@ -16,6 +16,17 @@
     --color-text: #e5e7eb;
     --color-text-secondary: #9ca3af;
     
+    /* Microsoft Colors */
+    --color-microsoft-blue: #0078d4;
+    --color-microsoft-light-blue: #0099ff;
+    --color-microsoft-dark-blue: #005a9e;
+    
+    /* Google Colors */
+    --color-google-blue: #4285f4;
+    --color-google-red: #ea4335;
+    --color-google-yellow: #fbbc05;
+    --color-google-green: #34a853;
+    
     /* Fonts */
     --font-poppins: 'Poppins', sans-serif;
     --font-opensans: 'Open Sans', sans-serif;
