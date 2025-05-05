@@ -1,0 +1,1644 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Panel - Leads Dashboard</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <style>
+        :root {
+            --color-primary: #6c63ff;
+            --color-secondary: #ff6584;
+            --color-accent: #44d7b6;
+            --color-dark: #131722;
+            --color-dark-light: #1c2033;
+            --color-text: #f9fafb;
+            --color-text-secondary: #9ca3af;
+            --color-gray: #4b5563;
+            --color-gray-light: #6b7280;
+            --color-white: #ffffff;
+            --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.05);
+            --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+            --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+            --shadow-xl: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+            --border-radius-sm: 0.25rem;
+            --border-radius-md: 0.5rem;
+            --border-radius-lg: 1rem;
+            --border-radius-full: 9999px;
+            --font-poppins: 'Poppins', sans-serif;
+            --font-opensans: 'Open Sans', sans-serif;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: var(--font-opensans);
+            background-color: var(--color-dark);
+            color: var(--color-text);
+            line-height: 1.6;
+        }
+        
+        /* Admin Dashboard Layout */
+        .admin-container {
+            display: flex;
+            min-height: 100vh;
+        }
+        
+        /* Sidebar */
+        .admin-sidebar {
+            width: 250px;
+            background-color: var(--color-dark-light);
+            border-right: 1px solid rgba(255, 255, 255, 0.1);
+            padding: 2rem 0;
+            position: fixed;
+            height: 100vh;
+            overflow-y: auto;
+        }
+        
+        .admin-logo {
+            padding: 0 2rem;
+            margin-bottom: 2rem;
+            display: flex;
+            align-items: center;
+        }
+        
+        .admin-logo h1 {
+            font-family: var(--font-poppins);
+            font-size: 1.5rem;
+            color: var(--color-primary);
+            margin-left: 0.5rem;
+        }
+        
+        .admin-nav {
+            list-style: none;
+        }
+        
+        .admin-nav-item {
+            margin-bottom: 0.5rem;
+        }
+        
+        .admin-nav-link {
+            display: flex;
+            align-items: center;
+            padding: 0.75rem 2rem;
+            color: var(--color-text-secondary);
+            text-decoration: none;
+            transition: all 0.3s ease;
+        }
+        
+        .admin-nav-link i {
+            margin-right: 1rem;
+            font-size: 1.2rem;
+            width: 20px;
+            text-align: center;
+        }
+        
+        .admin-nav-link:hover {
+            background-color: rgba(108, 99, 255, 0.1);
+            color: var(--color-primary);
+        }
+        
+        .admin-nav-link.active {
+            background-color: rgba(108, 99, 255, 0.15);
+            color: var(--color-primary);
+            border-left: 3px solid var(--color-primary);
+        }
+        
+        /* Main Content */
+        .admin-main {
+            flex: 1;
+            margin-left: 250px;
+            padding: 2rem;
+        }
+        
+        .admin-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 2rem;
+            padding-bottom: 1rem;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        
+        .admin-title h2 {
+            font-family: var(--font-poppins);
+            font-size: 1.8rem;
+            color: var(--color-text);
+        }
+        
+        .admin-title p {
+            color: var(--color-text-secondary);
+            font-size: 0.9rem;
+        }
+        
+        .admin-actions {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+        
+        /* Dashboard Stats */
+        .admin-stats {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 1.5rem;
+            margin-bottom: 2rem;
+        }
+        
+        .stat-card {
+            background-color: var(--color-dark-light);
+            border-radius: var(--border-radius-md);
+            padding: 1.5rem;
+            box-shadow: var(--shadow-md);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            transition: all 0.3s ease;
+        }
+        
+        .stat-card:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--shadow-lg);
+            border-color: rgba(108, 99, 255, 0.2);
+        }
+        
+        .stat-icon {
+            width: 50px;
+            height: 50px;
+            background-color: rgba(108, 99, 255, 0.15);
+            border-radius: var(--border-radius-full);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 1rem;
+            font-size: 1.5rem;
+            color: var(--color-primary);
+        }
+        
+        .stat-card:nth-child(2) .stat-icon {
+            background-color: rgba(68, 215, 182, 0.15);
+            color: var(--color-accent);
+        }
+        
+        .stat-card:nth-child(3) .stat-icon {
+            background-color: rgba(255, 101, 132, 0.15);
+            color: var(--color-secondary);
+        }
+        
+        .stat-card:nth-child(4) .stat-icon {
+            background-color: rgba(255, 199, 95, 0.15);
+            color: #ffc75f;
+        }
+        
+        .stat-title {
+            color: var(--color-text-secondary);
+            font-size: 0.9rem;
+            margin-bottom: 0.5rem;
+        }
+        
+        .stat-value {
+            font-size: 1.8rem;
+            font-weight: 700;
+            margin-bottom: 0.25rem;
+        }
+        
+        .stat-card:nth-child(1) .stat-value {
+            color: var(--color-primary);
+        }
+        
+        .stat-card:nth-child(2) .stat-value {
+            color: var(--color-accent);
+        }
+        
+        .stat-card:nth-child(3) .stat-value {
+            color: var(--color-secondary);
+        }
+        
+        .stat-card:nth-child(4) .stat-value {
+            color: #ffc75f;
+        }
+        
+        .stat-change {
+            font-size: 0.8rem;
+            display: flex;
+            align-items: center;
+            gap: 0.25rem;
+        }
+        
+        .stat-change.positive {
+            color: var(--color-accent);
+        }
+        
+        .stat-change.negative {
+            color: var(--color-secondary);
+        }
+        
+        /* Leads Table */
+        .leads-container {
+            background-color: var(--color-dark-light);
+            border-radius: var(--border-radius-lg);
+            box-shadow: var(--shadow-lg);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            overflow: hidden;
+        }
+        
+        .leads-header {
+            padding: 1.5rem;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .leads-header h3 {
+            font-size: 1.2rem;
+            color: var(--color-text);
+        }
+        
+        .leads-controls {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+        
+        .lead-search {
+            position: relative;
+        }
+        
+        .lead-search input {
+            background-color: var(--color-dark);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: var(--border-radius-full);
+            padding: 0.5rem 1rem 0.5rem 2.5rem;
+            font-size: 0.9rem;
+            color: var(--color-text);
+            width: 250px;
+            transition: all 0.3s ease;
+        }
+        
+        .lead-search input:focus {
+            outline: none;
+            border-color: var(--color-primary);
+            box-shadow: 0 0 0 2px rgba(108, 99, 255, 0.1);
+        }
+        
+        .lead-search i {
+            position: absolute;
+            left: 1rem;
+            top: 50%;
+            transform: translateY(-50%);
+            color: var(--color-text-secondary);
+        }
+        
+        .lead-filter select {
+            background-color: var(--color-dark);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: var(--border-radius-md);
+            padding: 0.5rem 2rem 0.5rem 1rem;
+            font-size: 0.9rem;
+            color: var(--color-text);
+            appearance: none;
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' fill='%236c63ff' viewBox='0 0 16 16'%3E%3Cpath d='M7.247 11.14L2.451 5.658C1.885 5.013 2.345 4 3.204 4h9.592a1 1 0 01.753 1.659l-4.796 5.48a1 1 0 01-1.506 0z'/%3E%3C/svg%3E");
+            background-repeat: no-repeat;
+            background-position: calc(100% - 10px) center;
+            transition: all 0.3s ease;
+        }
+        
+        .lead-filter select:focus {
+            outline: none;
+            border-color: var(--color-primary);
+            box-shadow: 0 0 0 2px rgba(108, 99, 255, 0.1);
+        }
+        
+        .leads-table-container {
+            overflow-x: auto;
+        }
+        
+        .leads-table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        
+        .leads-table thead th {
+            background-color: rgba(108, 99, 255, 0.05);
+            color: var(--color-text);
+            font-weight: 600;
+            text-align: left;
+            padding: 1rem 1.5rem;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        
+        .leads-table tbody tr {
+            transition: all 0.3s ease;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+        }
+        
+        .leads-table tbody tr:hover {
+            background-color: rgba(108, 99, 255, 0.05);
+        }
+        
+        .leads-table tbody td {
+            padding: 1rem 1.5rem;
+            color: var(--color-text-secondary);
+        }
+        
+        .lead-name {
+            color: var(--color-text);
+            font-weight: 500;
+        }
+        
+        .lead-status {
+            display: inline-block;
+            padding: 0.25rem 0.75rem;
+            border-radius: var(--border-radius-full);
+            font-size: 0.8rem;
+            font-weight: 500;
+        }
+        
+        .lead-status.new {
+            background-color: rgba(108, 99, 255, 0.15);
+            color: var(--color-primary);
+        }
+        
+        .lead-status.contacted {
+            background-color: rgba(68, 215, 182, 0.15);
+            color: var(--color-accent);
+        }
+        
+        .lead-status.converted {
+            background-color: rgba(16, 185, 129, 0.15);
+            color: #10b981;
+        }
+        
+        .lead-status.lost {
+            background-color: rgba(255, 101, 132, 0.15);
+            color: var(--color-secondary);
+        }
+        
+        .lead-actions {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+        
+        .lead-action-btn {
+            width: 32px;
+            height: 32px;
+            border-radius: var(--border-radius-full);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background-color: transparent;
+            border: none;
+            color: var(--color-text-secondary);
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+        
+        .lead-action-btn:hover {
+            background-color: rgba(255, 255, 255, 0.1);
+            color: var(--color-text);
+        }
+        
+        .lead-action-btn.view:hover {
+            color: var(--color-primary);
+        }
+        
+        .lead-action-btn.edit:hover {
+            color: var(--color-accent);
+        }
+        
+        .lead-action-btn.delete:hover {
+            color: var(--color-secondary);
+        }
+        
+        /* Pagination */
+        .leads-pagination {
+            display: flex;
+            justify-content: flex-end;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 1.5rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        
+        .pagination-info {
+            color: var(--color-text-secondary);
+            font-size: 0.9rem;
+            margin-right: auto;
+        }
+        
+        .pagination-btn {
+            width: 36px;
+            height: 36px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: var(--border-radius-md);
+            background-color: var(--color-dark);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            color: var(--color-text-secondary);
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+        
+        .pagination-btn:hover {
+            background-color: rgba(108, 99, 255, 0.1);
+            color: var(--color-primary);
+            border-color: rgba(108, 99, 255, 0.2);
+        }
+        
+        .pagination-btn.active {
+            background-color: var(--color-primary);
+            color: var(--color-white);
+            border-color: var(--color-primary);
+        }
+        
+        .pagination-btn.disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+        }
+        
+        .pagination-btn.disabled:hover {
+            background-color: var(--color-dark);
+            color: var(--color-text-secondary);
+            border-color: rgba(255, 255, 255, 0.1);
+        }
+        
+        /* Lead Detail Modal */
+        .lead-modal {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(19, 23, 34, 0.85);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 1000;
+            visibility: hidden;
+            opacity: 0;
+            transition: all 0.3s ease;
+        }
+        
+        .lead-modal.active {
+            visibility: visible;
+            opacity: 1;
+        }
+        
+        .lead-modal-content {
+            background-color: var(--color-dark-light);
+            border-radius: var(--border-radius-lg);
+            width: 700px;
+            max-width: 90%;
+            max-height: 90vh;
+            overflow-y: auto;
+            box-shadow: var(--shadow-xl);
+            border: 1px solid rgba(108, 99, 255, 0.2);
+            transform: translateY(30px) scale(0.95);
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+        
+        .lead-modal.active .lead-modal-content {
+            transform: translateY(0) scale(1);
+        }
+        
+        .lead-modal-header {
+            padding: 1.5rem;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .lead-modal-title {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+        
+        .lead-modal-title h3 {
+            font-size: 1.3rem;
+            margin: 0;
+        }
+        
+        .lead-modal-close {
+            background: none;
+            border: none;
+            color: var(--color-text-secondary);
+            font-size: 1.2rem;
+            cursor: pointer;
+        }
+        
+        .lead-modal-body {
+            padding: 1.5rem;
+        }
+        
+        .lead-detail-header {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 1.5rem;
+        }
+        
+        .lead-detail-status {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+        
+        .lead-detail-status label {
+            color: var(--color-text-secondary);
+        }
+        
+        .lead-detail-status select {
+            background-color: var(--color-dark);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: var(--border-radius-md);
+            padding: 0.25rem 2rem 0.25rem 0.5rem;
+            font-size: 0.9rem;
+            color: var(--color-text);
+            appearance: none;
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' fill='%236c63ff' viewBox='0 0 16 16'%3E%3Cpath d='M7.247 11.14L2.451 5.658C1.885 5.013 2.345 4 3.204 4h9.592a1 1 0 01.753 1.659l-4.796 5.48a1 1 0 01-1.506 0z'/%3E%3C/svg%3E");
+            background-repeat: no-repeat;
+            background-position: calc(100% - 5px) center;
+        }
+        
+        .lead-detail-timestamp {
+            color: var(--color-text-secondary);
+            font-size: 0.9rem;
+        }
+        
+        .lead-detail-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 1.5rem;
+            margin-bottom: 1.5rem;
+        }
+        
+        .lead-detail-item {
+            margin-bottom: 1rem;
+        }
+        
+        .lead-detail-label {
+            color: var(--color-text-secondary);
+            font-size: 0.9rem;
+            margin-bottom: 0.25rem;
+        }
+        
+        .lead-detail-value {
+            color: var(--color-text);
+        }
+        
+        .lead-detail-message {
+            grid-column: span 2;
+            background-color: rgba(255, 255, 255, 0.05);
+            border-radius: var(--border-radius-md);
+            padding: 1rem;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        
+        .lead-detail-actions {
+            display: flex;
+            justify-content: flex-end;
+            gap: 1rem;
+            margin-top: 1.5rem;
+            padding-top: 1.5rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        
+        .admin-btn {
+            padding: 0.5rem 1.5rem;
+            border-radius: var(--border-radius-md);
+            font-size: 0.9rem;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+        
+        .admin-btn-primary {
+            background-color: var(--color-primary);
+            color: var(--color-white);
+            border: none;
+        }
+        
+        .admin-btn-primary:hover {
+            background-color: #5a52db;
+            transform: translateY(-2px);
+        }
+        
+        .admin-btn-secondary {
+            background-color: transparent;
+            color: var(--color-text);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+        
+        .admin-btn-secondary:hover {
+            background-color: rgba(255, 255, 255, 0.1);
+        }
+        
+        .admin-btn-danger {
+            background-color: rgba(255, 101, 132, 0.2);
+            color: var(--color-secondary);
+            border: 1px solid rgba(255, 101, 132, 0.3);
+        }
+        
+        .admin-btn-danger:hover {
+            background-color: rgba(255, 101, 132, 0.3);
+        }
+        
+        /* No Leads Message */
+        .no-leads {
+            text-align: center;
+            padding: 3rem;
+            color: var(--color-text-secondary);
+        }
+        
+        .no-leads-icon {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            opacity: 0.3;
+        }
+        
+        .no-leads h3 {
+            margin-bottom: 0.5rem;
+            color: var(--color-text);
+        }
+        
+        /* Responsive Styles */
+        @media (max-width: 1024px) {
+            .admin-stats {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .admin-sidebar {
+                width: 70px;
+                padding: 1.5rem 0;
+            }
+            
+            .admin-logo {
+                padding: 0 1rem;
+                justify-content: center;
+            }
+            
+            .admin-logo h1 {
+                display: none;
+            }
+            
+            .admin-nav-link {
+                padding: 0.75rem 0;
+                justify-content: center;
+            }
+            
+            .admin-nav-link i {
+                margin-right: 0;
+            }
+            
+            .admin-nav-link span {
+                display: none;
+            }
+            
+            .admin-main {
+                margin-left: 70px;
+                padding: 1.5rem;
+            }
+            
+            .leads-header {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 1rem;
+            }
+            
+            .leads-controls {
+                width: 100%;
+                flex-wrap: wrap;
+            }
+            
+            .lead-search {
+                width: 100%;
+            }
+            
+            .lead-search input {
+                width: 100%;
+            }
+            
+            .lead-detail-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .lead-detail-message {
+                grid-column: span 1;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .admin-stats {
+                grid-template-columns: 1fr;
+            }
+            
+            .admin-header {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 1rem;
+            }
+            
+            .admin-actions {
+                width: 100%;
+                justify-content: flex-start;
+            }
+            
+            .leads-table thead th:nth-child(3),
+            .leads-table tbody td:nth-child(3) {
+                display: none;
+            }
+            
+            .lead-detail-actions {
+                flex-direction: column;
+            }
+            
+            .admin-btn {
+                width: 100%;
+                justify-content: center;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Admin Dashboard Layout -->
+    <div class="admin-container">
+        <!-- Sidebar -->
+        <div class="admin-sidebar">
+            <div class="admin-logo">
+                <i class="fas fa-user-shield" style="color: var(--color-primary); font-size: 1.5rem;"></i>
+                <h1>Admin Panel</h1>
+            </div>
+            
+            <ul class="admin-nav">
+                <li class="admin-nav-item">
+                    <a href="#" class="admin-nav-link active">
+                        <i class="fas fa-tachometer-alt"></i>
+                        <span>Dashboard</span>
+                    </a>
+                </li>
+                <li class="admin-nav-item">
+                    <a href="#" class="admin-nav-link">
+                        <i class="fas fa-users"></i>
+                        <span>Leads</span>
+                    </a>
+                </li>
+                <li class="admin-nav-item">
+                    <a href="#" class="admin-nav-link">
+                        <i class="fas fa-chart-line"></i>
+                        <span>Analytics</span>
+                    </a>
+                </li>
+                <li class="admin-nav-item">
+                    <a href="#" class="admin-nav-link">
+                        <i class="fas fa-cog"></i>
+                        <span>Settings</span>
+                    </a>
+                </li>
+                <li class="admin-nav-item">
+                    <a href="/" class="admin-nav-link">
+                        <i class="fas fa-globe"></i>
+                        <span>Visit Website</span>
+                    </a>
+                </li>
+                <li class="admin-nav-item">
+                    <a href="#" class="admin-nav-link">
+                        <i class="fas fa-sign-out-alt"></i>
+                        <span>Logout</span>
+                    </a>
+                </li>
+            </ul>
+        </div>
+        
+        <!-- Main Content -->
+        <div class="admin-main">
+            <div class="admin-header">
+                <div class="admin-title">
+                    <h2>Leads Dashboard</h2>
+                    <p>Manage your portfolio website leads and contacts</p>
+                </div>
+                
+                <div class="admin-actions">
+                    <button class="admin-btn admin-btn-primary" id="export-leads">
+                        <i class="fas fa-download"></i>
+                        <span>Export Leads</span>
+                    </button>
+                </div>
+            </div>
+            
+            <!-- Dashboard Stats -->
+            <div class="admin-stats">
+                <div class="stat-card">
+                    <div class="stat-icon">
+                        <i class="fas fa-users"></i>
+                    </div>
+                    <div class="stat-title">Total Leads</div>
+                    <div class="stat-value" id="total-leads-count">0</div>
+                    <div class="stat-change positive">
+                        <i class="fas fa-arrow-up"></i>
+                        <span id="leads-growth">0%</span> vs last month
+                    </div>
+                </div>
+                
+                <div class="stat-card">
+                    <div class="stat-icon">
+                        <i class="fas fa-user-plus"></i>
+                    </div>
+                    <div class="stat-title">New Leads</div>
+                    <div class="stat-value" id="new-leads-count">0</div>
+                    <div class="stat-change positive">
+                        <i class="fas fa-arrow-up"></i>
+                        <span id="new-leads-growth">0%</span> vs last month
+                    </div>
+                </div>
+                
+                <div class="stat-card">
+                    <div class="stat-icon">
+                        <i class="fas fa-chart-pie"></i>
+                    </div>
+                    <div class="stat-title">Conversion Rate</div>
+                    <div class="stat-value" id="conversion-rate">0%</div>
+                    <div class="stat-change positive">
+                        <i class="fas fa-arrow-up"></i>
+                        <span id="conversion-growth">0%</span> vs last month
+                    </div>
+                </div>
+                
+                <div class="stat-card">
+                    <div class="stat-icon">
+                        <i class="fas fa-clock"></i>
+                    </div>
+                    <div class="stat-title">Avg. Response Time</div>
+                    <div class="stat-value" id="avg-response-time">0h</div>
+                    <div class="stat-change negative">
+                        <i class="fas fa-arrow-down"></i>
+                        <span id="response-improvement">0%</span> vs last month
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Leads Table -->
+            <div class="leads-container">
+                <div class="leads-header">
+                    <h3>All Leads</h3>
+                    
+                    <div class="leads-controls">
+                        <div class="lead-search">
+                            <i class="fas fa-search"></i>
+                            <input type="text" id="lead-search-input" placeholder="Search leads...">
+                        </div>
+                        
+                        <div class="lead-filter">
+                            <select id="lead-status-filter">
+                                <option value="all">All Statuses</option>
+                                <option value="new">New</option>
+                                <option value="contacted">Contacted</option>
+                                <option value="converted">Converted</option>
+                                <option value="lost">Lost</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="leads-table-container">
+                    <table class="leads-table">
+                        <thead>
+                            <tr>
+                                <th>Name</th>
+                                <th>Email</th>
+                                <th>Project Type</th>
+                                <th>Budget</th>
+                                <th>Status</th>
+                                <th>Date</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody id="leads-table-body">
+                            <!-- Table rows will be populated by JavaScript -->
+                        </tbody>
+                    </table>
+                </div>
+                
+                <div id="no-leads-message" class="no-leads">
+                    <div class="no-leads-icon">
+                        <i class="fas fa-inbox"></i>
+                    </div>
+                    <h3>No leads found</h3>
+                    <p>Once you start receiving leads from your portfolio website, they will appear here.</p>
+                </div>
+                
+                <div class="leads-pagination">
+                    <div class="pagination-info" id="pagination-info">
+                        Showing 0 of 0 leads
+                    </div>
+                    
+                    <button class="pagination-btn pagination-prev disabled">
+                        <i class="fas fa-chevron-left"></i>
+                    </button>
+                    
+                    <div class="pagination-numbers" id="pagination-numbers">
+                        <button class="pagination-btn active">1</button>
+                    </div>
+                    
+                    <button class="pagination-btn pagination-next disabled">
+                        <i class="fas fa-chevron-right"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Lead Detail Modal -->
+    <div class="lead-modal" id="lead-detail-modal">
+        <div class="lead-modal-content">
+            <div class="lead-modal-header">
+                <div class="lead-modal-title">
+                    <i class="fas fa-user" style="color: var(--color-primary);"></i>
+                    <h3>Lead Details</h3>
+                </div>
+                <button class="lead-modal-close" id="lead-modal-close">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            
+            <div class="lead-modal-body" id="lead-detail-content">
+                <!-- Lead details will be populated by JavaScript -->
+            </div>
+        </div>
+    </div>
+    
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // DOM Elements
+            const leadsTableBody = document.getElementById('leads-table-body');
+            const noLeadsMessage = document.getElementById('no-leads-message');
+            const leadDetailModal = document.getElementById('lead-detail-modal');
+            const leadDetailContent = document.getElementById('lead-detail-content');
+            const leadModalClose = document.getElementById('lead-modal-close');
+            const exportLeadsBtn = document.getElementById('export-leads');
+            const leadSearchInput = document.getElementById('lead-search-input');
+            const leadStatusFilter = document.getElementById('lead-status-filter');
+            const totalLeadsCount = document.getElementById('total-leads-count');
+            const newLeadsCount = document.getElementById('new-leads-count');
+            const conversionRate = document.getElementById('conversion-rate');
+            const avgResponseTime = document.getElementById('avg-response-time');
+            
+            // State variables
+            let allLeads = [];
+            let filteredLeads = [];
+            let currentPage = 1;
+            const leadsPerPage = 10;
+            
+            // Initialize
+            loadLeads();
+            
+            // Event Listeners
+            leadModalClose.addEventListener('click', closeLeadModal);
+            exportLeadsBtn.addEventListener('click', exportLeadsToCSV);
+            leadSearchInput.addEventListener('input', filterLeads);
+            leadStatusFilter.addEventListener('change', filterLeads);
+            
+            // Functions
+            
+            // Load leads from localStorage
+            function loadLeads() {
+                const leadsData = localStorage.getItem('portfolioLeads');
+                
+                if (leadsData) {
+                    allLeads = JSON.parse(leadsData);
+                    
+                    // Set all leads to "new" status if not set
+                    allLeads = allLeads.map(lead => {
+                        if (!lead.status) {
+                            return {...lead, status: 'new'};
+                        }
+                        return lead;
+                    });
+                    
+                    // Sort by timestamp (newest first)
+                    allLeads.sort((a, b) => {
+                        return new Date(b.timestamp) - new Date(a.timestamp);
+                    });
+                    
+                    // Update localStorage with status
+                    localStorage.setItem('portfolioLeads', JSON.stringify(allLeads));
+                    
+                    // Update filtered leads
+                    filteredLeads = [...allLeads];
+                    
+                    // Render leads
+                    renderLeads();
+                    updateStats();
+                } else {
+                    // No leads found
+                    showNoLeadsMessage();
+                }
+            }
+            
+            // Render leads to table
+            function renderLeads() {
+                if (filteredLeads.length === 0) {
+                    showNoLeadsMessage();
+                    return;
+                }
+                
+                hideNoLeadsMessage();
+                
+                // Calculate pagination
+                const startIndex = (currentPage - 1) * leadsPerPage;
+                const endIndex = startIndex + leadsPerPage;
+                const paginatedLeads = filteredLeads.slice(startIndex, endIndex);
+                
+                // Clear table
+                leadsTableBody.innerHTML = '';
+                
+                // Add rows
+                paginatedLeads.forEach((lead, index) => {
+                    const row = document.createElement('tr');
+                    
+                    const formattedDate = formatDate(lead.timestamp);
+                    const statusClass = lead.status || 'new';
+                    
+                    row.innerHTML = `
+                        <td>
+                            <div class="lead-name">${lead.name || 'N/A'}</div>
+                        </td>
+                        <td>${lead.email || 'N/A'}</td>
+                        <td>${formatProjectType(lead.projectType) || 'N/A'}</td>
+                        <td>${formatBudget(lead.budget) || 'N/A'}</td>
+                        <td>
+                            <span class="lead-status ${statusClass}">${capitalizeFirstLetter(statusClass)}</span>
+                        </td>
+                        <td>${formattedDate}</td>
+                        <td>
+                            <div class="lead-actions">
+                                <button class="lead-action-btn view" data-index="${startIndex + index}">
+                                    <i class="fas fa-eye"></i>
+                                </button>
+                                <button class="lead-action-btn edit" data-index="${startIndex + index}">
+                                    <i class="fas fa-edit"></i>
+                                </button>
+                                <button class="lead-action-btn delete" data-index="${startIndex + index}">
+                                    <i class="fas fa-trash"></i>
+                                </button>
+                            </div>
+                        </td>
+                    `;
+                    
+                    leadsTableBody.appendChild(row);
+                });
+                
+                // Add event listeners to action buttons
+                addActionButtonListeners();
+                
+                // Update pagination
+                updatePagination();
+            }
+            
+            // Add event listeners to action buttons
+            function addActionButtonListeners() {
+                // View buttons
+                document.querySelectorAll('.lead-action-btn.view').forEach(btn => {
+                    btn.addEventListener('click', function() {
+                        const index = parseInt(this.getAttribute('data-index'));
+                        viewLead(index);
+                    });
+                });
+                
+                // Edit buttons
+                document.querySelectorAll('.lead-action-btn.edit').forEach(btn => {
+                    btn.addEventListener('click', function() {
+                        const index = parseInt(this.getAttribute('data-index'));
+                        viewLead(index, true);
+                    });
+                });
+                
+                // Delete buttons
+                document.querySelectorAll('.lead-action-btn.delete').forEach(btn => {
+                    btn.addEventListener('click', function() {
+                        const index = parseInt(this.getAttribute('data-index'));
+                        deleteLead(index);
+                    });
+                });
+            }
+            
+            // Show no leads message
+            function showNoLeadsMessage() {
+                noLeadsMessage.style.display = 'block';
+                document.querySelector('.leads-table-container').style.display = 'none';
+                document.querySelector('.leads-pagination').style.display = 'none';
+            }
+            
+            // Hide no leads message
+            function hideNoLeadsMessage() {
+                noLeadsMessage.style.display = 'none';
+                document.querySelector('.leads-table-container').style.display = 'block';
+                document.querySelector('.leads-pagination').style.display = 'flex';
+            }
+            
+            // Update pagination
+            function updatePagination() {
+                const paginationInfo = document.getElementById('pagination-info');
+                const paginationNumbers = document.getElementById('pagination-numbers');
+                const prevBtn = document.querySelector('.pagination-prev');
+                const nextBtn = document.querySelector('.pagination-next');
+                
+                // Calculate total pages
+                const totalPages = Math.ceil(filteredLeads.length / leadsPerPage);
+                
+                // Update info text
+                if (filteredLeads.length === 0) {
+                    paginationInfo.textContent = 'Showing 0 of 0 leads';
+                } else {
+                    const startIndex = (currentPage - 1) * leadsPerPage + 1;
+                    const endIndex = Math.min(startIndex + leadsPerPage - 1, filteredLeads.length);
+                    paginationInfo.textContent = `Showing ${startIndex}-${endIndex} of ${filteredLeads.length} leads`;
+                }
+                
+                // Update pagination numbers
+                paginationNumbers.innerHTML = '';
+                
+                if (totalPages <= 5) {
+                    // Show all pages
+                    for (let i = 1; i <= totalPages; i++) {
+                        const btn = document.createElement('button');
+                        btn.className = `pagination-btn ${i === currentPage ? 'active' : ''}`;
+                        btn.textContent = i;
+                        
+                        btn.addEventListener('click', function() {
+                            currentPage = i;
+                            renderLeads();
+                        });
+                        
+                        paginationNumbers.appendChild(btn);
+                    }
+                } else {
+                    // Show first, last, and current page with neighbors
+                    let pagesToShow = [1];
+                    
+                    if (currentPage > 2) {
+                        pagesToShow.push('...');
+                    }
+                    
+                    if (currentPage !== 1 && currentPage !== totalPages) {
+                        if (currentPage > 2) {
+                            pagesToShow.push(currentPage - 1);
+                        }
+                        
+                        pagesToShow.push(currentPage);
+                        
+                        if (currentPage < totalPages - 1) {
+                            pagesToShow.push(currentPage + 1);
+                        }
+                    }
+                    
+                    if (currentPage < totalPages - 1) {
+                        pagesToShow.push('...');
+                    }
+                    
+                    pagesToShow.push(totalPages);
+                    
+                    // Render pagination buttons
+                    pagesToShow.forEach(page => {
+                        if (page === '...') {
+                            const span = document.createElement('span');
+                            span.className = 'pagination-ellipsis';
+                            span.textContent = '...';
+                            paginationNumbers.appendChild(span);
+                        } else {
+                            const btn = document.createElement('button');
+                            btn.className = `pagination-btn ${page === currentPage ? 'active' : ''}`;
+                            btn.textContent = page;
+                            
+                            btn.addEventListener('click', function() {
+                                currentPage = page;
+                                renderLeads();
+                            });
+                            
+                            paginationNumbers.appendChild(btn);
+                        }
+                    });
+                }
+                
+                // Update prev/next buttons
+                if (currentPage === 1) {
+                    prevBtn.classList.add('disabled');
+                } else {
+                    prevBtn.classList.remove('disabled');
+                    prevBtn.onclick = function() {
+                        if (currentPage > 1) {
+                            currentPage--;
+                            renderLeads();
+                        }
+                    };
+                }
+                
+                if (currentPage === totalPages || totalPages === 0) {
+                    nextBtn.classList.add('disabled');
+                } else {
+                    nextBtn.classList.remove('disabled');
+                    nextBtn.onclick = function() {
+                        if (currentPage < totalPages) {
+                            currentPage++;
+                            renderLeads();
+                        }
+                    };
+                }
+            }
+            
+            // View lead details
+            function viewLead(index, isEditable = false) {
+                const lead = filteredLeads[index];
+                
+                if (!lead) return;
+                
+                // Format date
+                const formattedDate = formatDate(lead.timestamp);
+                
+                // Build lead detail HTML
+                const detailHTML = `
+                    <div class="lead-detail-header">
+                        <div class="lead-detail-status">
+                            <label for="lead-status">Status:</label>
+                            <select id="lead-status" ${!isEditable ? 'disabled' : ''}>
+                                <option value="new" ${lead.status === 'new' ? 'selected' : ''}>New</option>
+                                <option value="contacted" ${lead.status === 'contacted' ? 'selected' : ''}>Contacted</option>
+                                <option value="converted" ${lead.status === 'converted' ? 'selected' : ''}>Converted</option>
+                                <option value="lost" ${lead.status === 'lost' ? 'selected' : ''}>Lost</option>
+                            </select>
+                        </div>
+                        <div class="lead-detail-timestamp">
+                            Submitted: ${formattedDate}
+                        </div>
+                    </div>
+                    
+                    <div class="lead-detail-grid">
+                        <div class="lead-detail-item">
+                            <div class="lead-detail-label">Name</div>
+                            <div class="lead-detail-value">${lead.name || 'N/A'}</div>
+                        </div>
+                        
+                        <div class="lead-detail-item">
+                            <div class="lead-detail-label">Email</div>
+                            <div class="lead-detail-value">${lead.email || 'N/A'}</div>
+                        </div>
+                        
+                        <div class="lead-detail-item">
+                            <div class="lead-detail-label">Phone</div>
+                            <div class="lead-detail-value">${lead.phone || 'N/A'}</div>
+                        </div>
+                        
+                        <div class="lead-detail-item">
+                            <div class="lead-detail-label">Project Type</div>
+                            <div class="lead-detail-value">${formatProjectType(lead.projectType) || 'N/A'}</div>
+                        </div>
+                        
+                        <div class="lead-detail-item">
+                            <div class="lead-detail-label">Budget</div>
+                            <div class="lead-detail-value">${formatBudget(lead.budget) || 'N/A'}</div>
+                        </div>
+                        
+                        <div class="lead-detail-item">
+                            <div class="lead-detail-label">Timeline</div>
+                            <div class="lead-detail-value">${formatTimeline(lead.timeline) || 'N/A'}</div>
+                        </div>
+                        
+                        <div class="lead-detail-item lead-detail-message">
+                            <div class="lead-detail-label">Project Details</div>
+                            <div class="lead-detail-value">${lead.message || 'No message provided.'}</div>
+                        </div>
+                        
+                        <div class="lead-detail-item">
+                            <div class="lead-detail-label">Newsletter Subscription</div>
+                            <div class="lead-detail-value">${lead.newsletter ? 'Yes' : 'No'}</div>
+                        </div>
+                    </div>
+                    
+                    <div class="lead-detail-actions">
+                        ${isEditable ? `
+                            <button class="admin-btn admin-btn-primary" id="save-lead-btn" data-index="${index}">
+                                <i class="fas fa-save"></i>
+                                <span>Save Changes</span>
+                            </button>
+                        ` : `
+                            <button class="admin-btn admin-btn-primary" id="contact-lead-btn">
+                                <i class="fas fa-envelope"></i>
+                                <span>Contact Lead</span>
+                            </button>
+                        `}
+                        
+                        <button class="admin-btn admin-btn-secondary" id="close-detail-btn">
+                            <i class="fas fa-times"></i>
+                            <span>Close</span>
+                        </button>
+                        
+                        <button class="admin-btn admin-btn-danger" id="delete-lead-btn" data-index="${index}">
+                            <i class="fas fa-trash"></i>
+                            <span>Delete Lead</span>
+                        </button>
+                    </div>
+                `;
+                
+                // Set content and open modal
+                leadDetailContent.innerHTML = detailHTML;
+                openLeadModal();
+                
+                // Add event listeners to buttons
+                document.getElementById('close-detail-btn').addEventListener('click', closeLeadModal);
+                
+                const deleteBtn = document.getElementById('delete-lead-btn');
+                deleteBtn.addEventListener('click', function() {
+                    const index = parseInt(this.getAttribute('data-index'));
+                    closeLeadModal();
+                    deleteLead(index);
+                });
+                
+                if (isEditable) {
+                    const saveBtn = document.getElementById('save-lead-btn');
+                    saveBtn.addEventListener('click', function() {
+                        const index = parseInt(this.getAttribute('data-index'));
+                        const newStatus = document.getElementById('lead-status').value;
+                        
+                        // Update lead status
+                        filteredLeads[index].status = newStatus;
+                        
+                        // Find the lead in the allLeads array
+                        const allLeadsIndex = allLeads.findIndex(l => l.timestamp === filteredLeads[index].timestamp);
+                        if (allLeadsIndex !== -1) {
+                            allLeads[allLeadsIndex].status = newStatus;
+                        }
+                        
+                        // Save to localStorage
+                        localStorage.setItem('portfolioLeads', JSON.stringify(allLeads));
+                        
+                        // Close modal and re-render
+                        closeLeadModal();
+                        renderLeads();
+                        updateStats();
+                    });
+                } else {
+                    const contactBtn = document.getElementById('contact-lead-btn');
+                    contactBtn.addEventListener('click', function() {
+                        // Open email client with lead email
+                        window.location.href = `mailto:${lead.email}?subject=RE: Your Project Inquiry&body=Hello ${lead.name},\n\nThank you for reaching out about your project. I've reviewed your requirements and would love to discuss further.\n\nBest regards,\nMoeed-ul-Hassan`;
+                        
+                        // Update lead status to "contacted" if it's "new"
+                        if (filteredLeads[index].status === 'new') {
+                            filteredLeads[index].status = 'contacted';
+                            
+                            // Find the lead in the allLeads array
+                            const allLeadsIndex = allLeads.findIndex(l => l.timestamp === filteredLeads[index].timestamp);
+                            if (allLeadsIndex !== -1) {
+                                allLeads[allLeadsIndex].status = 'contacted';
+                            }
+                            
+                            // Save to localStorage
+                            localStorage.setItem('portfolioLeads', JSON.stringify(allLeads));
+                            renderLeads();
+                            updateStats();
+                        }
+                    });
+                }
+            }
+            
+            // Open lead modal
+            function openLeadModal() {
+                leadDetailModal.classList.add('active');
+                document.body.style.overflow = 'hidden';
+            }
+            
+            // Close lead modal
+            function closeLeadModal() {
+                leadDetailModal.classList.remove('active');
+                document.body.style.overflow = '';
+            }
+            
+            // Delete lead
+            function deleteLead(index) {
+                const lead = filteredLeads[index];
+                
+                if (confirm(`Are you sure you want to delete the lead from ${lead.name}? This action cannot be undone.`)) {
+                    // Find the lead in the allLeads array
+                    const allLeadsIndex = allLeads.findIndex(l => l.timestamp === lead.timestamp);
+                    
+                    if (allLeadsIndex !== -1) {
+                        // Remove from allLeads
+                        allLeads.splice(allLeadsIndex, 1);
+                        
+                        // Save to localStorage
+                        localStorage.setItem('portfolioLeads', JSON.stringify(allLeads));
+                        
+                        // Update filteredLeads
+                        filterLeads();
+                        
+                        // Update statistics
+                        updateStats();
+                    }
+                }
+            }
+            
+            // Filter leads
+            function filterLeads() {
+                const searchTerm = leadSearchInput.value.toLowerCase();
+                const statusFilter = leadStatusFilter.value;
+                
+                filteredLeads = allLeads.filter(lead => {
+                    // Status filter
+                    if (statusFilter !== 'all' && lead.status !== statusFilter) {
+                        return false;
+                    }
+                    
+                    // Search term filter
+                    if (searchTerm) {
+                        const name = (lead.name || '').toLowerCase();
+                        const email = (lead.email || '').toLowerCase();
+                        const projectType = (lead.projectType || '').toLowerCase();
+                        const message = (lead.message || '').toLowerCase();
+                        
+                        return name.includes(searchTerm) || 
+                               email.includes(searchTerm) || 
+                               projectType.includes(searchTerm) || 
+                               message.includes(searchTerm);
+                    }
+                    
+                    return true;
+                });
+                
+                // Reset to first page
+                currentPage = 1;
+                
+                // Render filtered leads
+                renderLeads();
+            }
+            
+            // Export leads to CSV
+            function exportLeadsToCSV() {
+                if (allLeads.length === 0) {
+                    alert('No leads to export.');
+                    return;
+                }
+                
+                // CSV Headers
+                const headers = ['Name', 'Email', 'Phone', 'Project Type', 'Budget', 'Timeline', 'Message', 'Newsletter', 'Status', 'Date'];
+                
+                // CSV Rows
+                const rows = allLeads.map(lead => [
+                    lead.name || '',
+                    lead.email || '',
+                    lead.phone || '',
+                    formatProjectType(lead.projectType) || '',
+                    formatBudget(lead.budget) || '',
+                    formatTimeline(lead.timeline) || '',
+                    `"${(lead.message || '').replace(/"/g, '""')}"`,
+                    lead.newsletter ? 'Yes' : 'No',
+                    capitalizeFirstLetter(lead.status || 'new'),
+                    formatDate(lead.timestamp)
+                ]);
+                
+                // Create CSV content
+                let csvContent = headers.join(',') + '\n';
+                rows.forEach(row => {
+                    csvContent += row.join(',') + '\n';
+                });
+                
+                // Create download link
+                const encodedUri = encodeURI('data:text/csv;charset=utf-8,' + csvContent);
+                const link = document.createElement('a');
+                link.setAttribute('href', encodedUri);
+                link.setAttribute('download', `leads_export_${formatDateForFilename(new Date())}.csv`);
+                document.body.appendChild(link);
+                
+                // Download CSV
+                link.click();
+                
+                // Clean up
+                document.body.removeChild(link);
+            }
+            
+            // Update dashboard stats
+            function updateStats() {
+                // Total leads
+                totalLeadsCount.textContent = allLeads.length;
+                
+                // New leads (leads with "new" status)
+                const newLeads = allLeads.filter(lead => lead.status === 'new');
+                newLeadsCount.textContent = newLeads.length;
+                
+                // Conversion rate (leads with "converted" status)
+                const convertedLeads = allLeads.filter(lead => lead.status === 'converted');
+                const conversionRateValue = allLeads.length > 0 
+                    ? ((convertedLeads.length / allLeads.length) * 100).toFixed(1) 
+                    : 0;
+                conversionRate.textContent = `${conversionRateValue}%`;
+                
+                // Average response time - in a real app, this would be calculated based on when you contacted the lead
+                // For this demo, we'll use a static value
+                avgResponseTime.textContent = '2h';
+                
+                // Growth percentages - in a real app, these would be calculated based on historical data
+                // For this demo, we'll use static values
+                document.getElementById('leads-growth').textContent = `${getRandomGrowth()}%`;
+                document.getElementById('new-leads-growth').textContent = `${getRandomGrowth()}%`;
+                document.getElementById('conversion-growth').textContent = `${getRandomGrowth()}%`;
+                document.getElementById('response-improvement').textContent = `${getRandomGrowth()}%`;
+            }
+            
+            // Helper function to get random growth percentage for demo
+            function getRandomGrowth() {
+                return Math.floor(Math.random() * 30) + 5;
+            }
+            
+            // Helper function to format date
+            function formatDate(timestamp) {
+                if (!timestamp) return 'N/A';
+                
+                const date = new Date(timestamp);
+                return date.toLocaleDateString('en-US', {
+                    year: 'numeric',
+                    month: 'short',
+                    day: 'numeric',
+                    hour: '2-digit',
+                    minute: '2-digit'
+                });
+            }
+            
+            // Helper function to format date for filename
+            function formatDateForFilename(date) {
+                return `${date.getFullYear()}-${String(date.getMonth() + 1).padStart(2, '0')}-${String(date.getDate()).padStart(2, '0')}`;
+            }
+            
+            // Helper function to format project type
+            function formatProjectType(type) {
+                if (!type) return 'N/A';
+                
+                const typeMap = {
+                    'website': 'Website Development',
+                    '3d-experience': '3D Web Experience',
+                    'ui-design': 'UI/UX Design',
+                    'animation': 'Animation & Effects',
+                    'other': 'Other'
+                };
+                
+                return typeMap[type] || type;
+            }
+            
+            // Helper function to format budget
+            function formatBudget(budget) {
+                if (!budget) return 'N/A';
+                
+                const budgetMap = {
+                    'small': '$500 - $1,000',
+                    'medium': '$1,000 - $3,000',
+                    'large': '$3,000 - $5,000',
+                    'enterprise': '$5,000+'
+                };
+                
+                return budgetMap[budget] || budget;
+            }
+            
+            // Helper function to format timeline
+            function formatTimeline(timeline) {
+                if (!timeline) return 'N/A';
+                
+                const timelineMap = {
+                    'urgent': 'Urgent (< 2 weeks)',
+                    'standard': 'Standard (2-4 weeks)',
+                    'flexible': 'Flexible (1-2 months)',
+                    'longterm': 'Long-term (3+ months)'
+                };
+                
+                return timelineMap[timeline] || timeline;
+            }
+            
+            // Helper function to capitalize first letter
+            function capitalizeFirstLetter(string) {
+                return string.charAt(0).toUpperCase() + string.slice(1);
+            }
+            
+            // Listen for click outside modal to close it
+            window.addEventListener('click', function(event) {
+                if (event.target === leadDetailModal) {
+                    closeLeadModal();
+                }
+            });
+            
+            // Listen for escape key to close modal
+            document.addEventListener('keydown', function(event) {
+                if (event.key === 'Escape' && leadDetailModal.classList.contains('active')) {
+                    closeLeadModal();
+                }
+            });
+        });
+    </script>
+</body>
+</html>

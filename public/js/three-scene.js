@@ -98,37 +98,21 @@ document.addEventListener('DOMContentLoaded', function() {
             texture.anisotropy = renderer.capabilities.getMaxAnisotropy();
             texture.minFilter = THREE.LinearFilter;
             
+            // Create a material with your profile image for all sides
+            const imageMaterial = new THREE.MeshStandardMaterial({ 
+                map: texture,
+                roughness: 0.3,
+                metalness: 0.5
+            });
+            
+            // Apply the image material to all six sides of the cube
             const materials = [
-                new THREE.MeshStandardMaterial({ 
-                    color: 0x6c63ff,
-                    roughness: 0.5,
-                    metalness: 0.8
-                }), // Right side
-                new THREE.MeshStandardMaterial({ 
-                    color: 0x6c63ff,
-                    roughness: 0.5,
-                    metalness: 0.8
-                }), // Left side
-                new THREE.MeshStandardMaterial({ 
-                    color: 0x6c63ff,
-                    roughness: 0.5,
-                    metalness: 0.8
-                }), // Top side
-                new THREE.MeshStandardMaterial({ 
-                    color: 0x6c63ff,
-                    roughness: 0.5,
-                    metalness: 0.8
-                }), // Bottom side
-                new THREE.MeshStandardMaterial({ 
-                    map: texture,
-                    roughness: 0.3,
-                    metalness: 0.5
-                }), // Front side with image
-                new THREE.MeshStandardMaterial({ 
-                    color: 0x6c63ff,
-                    roughness: 0.5,
-                    metalness: 0.8
-                }) // Back side
+                imageMaterial, // Right side
+                imageMaterial, // Left side
+                imageMaterial, // Top side
+                imageMaterial, // Bottom side
+                imageMaterial, // Front side
+                imageMaterial  // Back side
             ];
             
             model = new THREE.Mesh(geometry, materials);
