@@ -1,0 +1,962 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Moeed-ul-Hassan | Web Developer & 3D Designer</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link rel="stylesheet" href="style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&family=Open+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <!-- Loading Screen -->
+    <div id="loading-screen">
+        <div class="loading-content">
+            <div class="spinner"></div>
+            <h2 class="gradient-text">Moeed-ul-Hassan</h2>
+            <p>Loading awesome experience...</p>
+        </div>
+    </div>
+
+    <!-- Terminal Section -->
+    <div id="terminal-container" class="hidden">
+        <div id="terminal-header">
+            <div class="terminal-controls">
+                <span class="terminal-close" id="terminal-close"></span>
+                <span class="terminal-minimize"></span>
+                <span class="terminal-maximize"></span>
+            </div>
+            <div class="terminal-title">moeed@portfolio ~ $</div>
+        </div>
+        <div id="terminal-body">
+            <div id="terminal-output">
+                <p class="terminal-welcome">Welcome to Moeed's Interactive Terminal! Type 'help' to see available commands.</p>
+            </div>
+            <div class="terminal-input-line">
+                <span class="terminal-prompt">moeed@portfolio:~$</span>
+                <input type="text" id="terminal-input" autofocus>
+            </div>
+        </div>
+    </div>
+
+    <!-- Terminal Toggle Button -->
+    <button id="terminal-toggle" class="terminal-toggle-btn">
+        <i class="fas fa-terminal"></i>
+    </button>
+
+    <!-- Custom Cursor -->
+    <div class="custom-cursor"></div>
+
+    <!-- Navigation -->
+    <nav id="navbar">
+        <div class="container">
+            <div class="navbar-content">
+                <a href="#" class="logo">
+                    <span class="gradient-text">Moeed</span><span>.</span>
+                </a>
+                
+                <div class="desktop-menu">
+                    <a href="#home" class="nav-link">Home</a>
+                    <a href="#about" class="nav-link">About</a>
+                    <a href="#skills" class="nav-link">Skills</a>
+                    <a href="#services" class="nav-link">Services</a>
+                    <a href="#projects" class="nav-link">Projects</a>
+                    <a href="#testimonials" class="nav-link">Testimonials</a>
+                    <a href="#contact" class="nav-link">Contact</a>
+                </div>
+                
+                <button class="mobile-menu-btn">
+                    <i class="fas fa-bars"></i>
+                </button>
+            </div>
+            
+            <div class="mobile-menu hidden">
+                <a href="#home" class="nav-link">Home</a>
+                <a href="#about" class="nav-link">About</a>
+                <a href="#skills" class="nav-link">Skills</a>
+                <a href="#services" class="nav-link">Services</a>
+                <a href="#projects" class="nav-link">Projects</a>
+                <a href="#testimonials" class="nav-link">Testimonials</a>
+                <a href="#contact" class="nav-link">Contact</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section id="home" class="section">
+        <!-- Floating particles container -->
+        <div id="particles" class="particles"></div>
+        
+        <!-- Animated gradient background -->
+        <div class="gradient-bg"></div>
+        
+        <div class="container">
+            <div class="hero-content">
+                <div class="hero-text">
+                    <!-- Decorative elements -->
+                    <div class="hero-blob hero-blob-1"></div>
+                    <div class="hero-blob hero-blob-2"></div>
+                    
+                    <p class="accent-text animate-pulse">Hello, I'm</p>
+                    <h1 id="hero-title">
+                        <span class="gradient-text">Moeed-ul-Hassan</span>
+                    </h1>
+                    <div class="typewriter-container">
+                        <p class="typewriter-text">
+                            <span id="typewriter"></span><span class="cursor"></span>
+                        </p>
+                    </div>
+                    <p id="hero-subtitle">
+                        Web developer with a passion for creating interactive, animated experiences that engage users and tell compelling stories.
+                    </p>
+                    <div id="hero-buttons">
+                        <a href="#projects" class="btn btn-primary">
+                            <span>View My Work</span>
+                            <i class="fas fa-arrow-right"></i>
+                        </a>
+                        <a href="#contact" class="btn btn-outline">
+                            Contact Me
+                        </a>
+                    </div>
+                    <div id="hero-social">
+                        <a href="https://github.com/Moeed-ul-Hassan" target="_blank" rel="noopener noreferrer">
+                            <i class="fab fa-github"></i>
+                        </a>
+                        <a href="#" target="_blank" rel="noopener noreferrer">
+                            <i class="fab fa-linkedin"></i>
+                        </a>
+                        <a href="#" target="_blank" rel="noopener noreferrer">
+                            <i class="fab fa-twitter"></i>
+                        </a>
+                        <a href="#" target="_blank" rel="noopener noreferrer">
+                            <i class="fab fa-dribbble"></i>
+                        </a>
+                    </div>
+                </div>
+                <div class="hero-3d">
+                    <!-- 3D scene container -->
+                    <div class="canvas-container">
+                        <canvas id="three-canvas"></canvas>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="scroll-down">
+                <a href="#about">
+                    <i class="fas fa-chevron-down"></i>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about" class="section bg-dot-pattern">
+        <div class="container">
+            <div class="section-header">
+                <h2 id="about-title">About <span class="gradient-text">Me</span></h2>
+                <div id="about-underline" class="section-underline"></div>
+                <p class="section-description">Get to know more about me, my background, and what drives my passion for creating amazing web experiences.</p>
+            </div>
+            
+            <div class="about-content">
+                <div class="about-image">
+                    <div class="about-image-bg"></div>
+                    <div class="about-image-container">
+                        <img src="assets/profile.jpg" alt="Moeed-ul-Hassan">
+                    </div>
+                </div>
+                
+                <div class="about-text">
+                    <h3 class="gradient-text">Web Developer & Interactive Designer</h3>
+                    <p class="text-light">
+                        With 3 years of experience in web development, I specialize in creating engaging, animated web experiences 
+                        that combine beautiful design with smooth functionality. My passion lies in the intersection of 
+                        creative visuals and technical excellence.
+                    </p>
+                    <p class="text-secondary">
+                        I love working with modern frameworks and technologies to create websites that stand out 
+                        from the crowd with unique animations and interactive elements that leave a lasting impression.
+                    </p>
+                    
+                    <div class="about-info">
+                        <div class="about-info-col">
+                            <p><span>Name:</span>Moeed-ul-Hassan</p>
+                            <p><span>Experience:</span>3 Years</p>
+                            <p><span>Freelance:</span>Available</p>
+                        </div>
+                        <div class="about-info-col">
+                            <p><span>Email:</span>moeed@example.com</p>
+                            <p><span>From:</span>Pakistan</p>
+                            <p><span>Languages:</span>English, Urdu</p>
+                        </div>
+                    </div>
+                    
+                    <div class="skills-pills" id="skills-pills">
+                        <span class="skills-pill">JavaScript</span>
+                        <span class="skills-pill">HTML5</span>
+                        <span class="skills-pill">CSS3</span>
+                        <span class="skills-pill">Three.js</span>
+                        <span class="skills-pill">GSAP</span>
+                        <span class="skills-pill">Responsive Design</span>
+                        <span class="skills-pill">3D Modeling</span>
+                        <span class="skills-pill">WebGL</span>
+                        <span class="skills-pill">React</span>
+                    </div>
+                    
+                    <div class="about-buttons">
+                        <a href="#contact" class="btn btn-primary">
+                            <i class="fas fa-envelope"></i> Contact Me
+                        </a>
+                        <a href="https://github.com/Moeed-ul-Hassan" target="_blank" rel="noopener noreferrer" class="btn btn-secondary">
+                            <i class="fab fa-github"></i> View My GitHub
+                        </a>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Stats Section -->
+            <div class="stats-section" id="stats-section">
+                <div class="stat-card">
+                    <h3 class="stat-number" data-target="15">0</h3>
+                    <p>Projects Completed</p>
+                </div>
+                
+                <div class="stat-card">
+                    <h3 class="stat-number" data-target="12">0</h3>
+                    <p>Happy Clients</p>
+                </div>
+                
+                <div class="stat-card">
+                    <h3 class="stat-number" data-target="3">0</h3>
+                    <p>Years Experience</p>
+                </div>
+                
+                <div class="stat-card">
+                    <h3 class="stat-number" data-target="5">0</h3>
+                    <p>Awards Received</p>
+                </div>
+            </div>
+            
+            <!-- Education & Experience Timeline -->
+            <div class="timeline-section" id="timeline-section">
+                <div class="timeline-education">
+                    <h3 class="gradient-text">Education</h3>
+                    
+                    <div class="timeline-item">
+                        <div class="timeline-dot timeline-dot-primary"></div>
+                        <div class="timeline-content">
+                            <p class="timeline-date">2018 - 2022</p>
+                            <h4>Bachelor of Computer Science</h4>
+                            <p>National University of Computer and Emerging Sciences, Pakistan</p>
+                        </div>
+                    </div>
+                    
+                    <div class="timeline-item">
+                        <div class="timeline-dot timeline-dot-primary"></div>
+                        <div class="timeline-content">
+                            <p class="timeline-date">2017 - 2018</p>
+                            <h4>Web Development Bootcamp</h4>
+                            <p>Tech Academy, Online</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="timeline-experience">
+                    <h3 class="gradient-text">Experience</h3>
+                    
+                    <div class="timeline-item">
+                        <div class="timeline-dot timeline-dot-secondary"></div>
+                        <div class="timeline-content">
+                            <p class="timeline-date timeline-date-secondary">2022 - Present</p>
+                            <h4>Senior Web Developer</h4>
+                            <p>Creative Solutions, Remote</p>
+                        </div>
+                    </div>
+                    
+                    <div class="timeline-item">
+                        <div class="timeline-dot timeline-dot-secondary"></div>
+                        <div class="timeline-content">
+                            <p class="timeline-date timeline-date-secondary">2020 - 2022</p>
+                            <h4>Frontend Developer</h4>
+                            <p>Digital Innovations, Islamabad</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Skills Section -->
+    <section id="skills" class="section bg-gradient">
+        <div class="container">
+            <div class="section-header">
+                <h2>My <span class="gradient-text">Skills</span></h2>
+                <div class="section-underline"></div>
+                <p class="section-description">Here's a more detailed breakdown of my technical expertise and soft skills that I bring to every project.</p>
+            </div>
+            
+            <div class="skills-container">
+                <div class="technical-skills">
+                    <h3 class="gradient-text">Technical Skills</h3>
+                    
+                    <div class="skill-bar-container">
+                        <div class="skill-info">
+                            <span>HTML & CSS</span>
+                            <span>95%</span>
+                        </div>
+                        <div class="skill-bar">
+                            <div class="skill-progress" data-width="95"></div>
+                        </div>
+                    </div>
+                    
+                    <div class="skill-bar-container">
+                        <div class="skill-info">
+                            <span>JavaScript</span>
+                            <span>90%</span>
+                        </div>
+                        <div class="skill-bar">
+                            <div class="skill-progress" data-width="90"></div>
+                        </div>
+                    </div>
+                    
+                    <div class="skill-bar-container">
+                        <div class="skill-info">
+                            <span>Three.js</span>
+                            <span>85%</span>
+                        </div>
+                        <div class="skill-bar">
+                            <div class="skill-progress" data-width="85"></div>
+                        </div>
+                    </div>
+                    
+                    <div class="skill-bar-container">
+                        <div class="skill-info">
+                            <span>GSAP Animations</span>
+                            <span>88%</span>
+                        </div>
+                        <div class="skill-bar">
+                            <div class="skill-progress" data-width="88"></div>
+                        </div>
+                    </div>
+                    
+                    <div class="skill-bar-container">
+                        <div class="skill-info">
+                            <span>React</span>
+                            <span>82%</span>
+                        </div>
+                        <div class="skill-bar">
+                            <div class="skill-progress" data-width="82"></div>
+                        </div>
+                    </div>
+                    
+                    <div class="skill-bar-container">
+                        <div class="skill-info">
+                            <span>Responsive Design</span>
+                            <span>95%</span>
+                        </div>
+                        <div class="skill-bar">
+                            <div class="skill-progress" data-width="95"></div>
+                        </div>
+                    </div>
+                    
+                    <div class="skill-bar-container">
+                        <div class="skill-info">
+                            <span>UI/UX Design</span>
+                            <span>80%</span>
+                        </div>
+                        <div class="skill-bar">
+                            <div class="skill-progress" data-width="80"></div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="soft-skills">
+                    <h3 class="gradient-text">Software & Tools</h3>
+                    
+                    <div class="tools-grid">
+                        <div class="tool-card">
+                            <div class="tool-icon">
+                                <i class="fas fa-code"></i>
+                            </div>
+                            <h4>VS Code</h4>
+                            <p>Primary IDE</p>
+                        </div>
+                        
+                        <div class="tool-card">
+                            <div class="tool-icon">
+                                <i class="fab fa-figma"></i>
+                            </div>
+                            <h4>Figma</h4>
+                            <p>UI Design</p>
+                        </div>
+                        
+                        <div class="tool-card">
+                            <div class="tool-icon">
+                                <i class="fab fa-git-alt"></i>
+                            </div>
+                            <h4>Git</h4>
+                            <p>Version Control</p>
+                        </div>
+                        
+                        <div class="tool-card">
+                            <div class="tool-icon">
+                                <i class="fas fa-cube"></i>
+                            </div>
+                            <h4>Blender</h4>
+                            <p>3D Modeling</p>
+                        </div>
+                    </div>
+                    
+                    <h3 class="gradient-text">Soft Skills</h3>
+                    <div class="soft-skills-list">
+                        <div class="soft-skill">
+                            <i class="fas fa-check-circle"></i>
+                            <span>Problem Solving & Critical Thinking</span>
+                        </div>
+                        <div class="soft-skill">
+                            <i class="fas fa-check-circle"></i>
+                            <span>Communication & Collaboration</span>
+                        </div>
+                        <div class="soft-skill">
+                            <i class="fas fa-check-circle"></i>
+                            <span>Time Management & Organization</span>
+                        </div>
+                        <div class="soft-skill">
+                            <i class="fas fa-check-circle"></i>
+                            <span>Attention to Detail</span>
+                        </div>
+                        <div class="soft-skill">
+                            <i class="fas fa-check-circle"></i>
+                            <span>Adaptability & Learning Attitude</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Services Section -->
+    <section id="services" class="section">
+        <div class="bg-decoration"></div>
+        <div class="bg-decoration-2"></div>
+        <div class="bg-decoration-3"></div>
+        
+        <div class="container">
+            <div class="section-header">
+                <h2 id="services-title">My <span class="gradient-text">Services</span></h2>
+                <div id="services-underline" class="section-underline"></div>
+                <p id="services-description" class="section-description">
+                    I offer a range of services to help brands and individuals establish a strong online presence with engaging and interactive experiences that leave a lasting impression.
+                </p>
+            </div>
+            
+            <div class="services-grid">
+                <div class="service-card" data-color="primary">
+                    <div class="service-icon-container bg-primary">
+                        <i class="fas fa-laptop-code"></i>
+                    </div>
+                    <h3>Web Development</h3>
+                    <p>Custom website development with clean code, responsive design, and optimal performance across all devices.</p>
+                    <div class="service-hover-line"></div>
+                </div>
+                
+                <div class="service-card" data-color="accent">
+                    <div class="service-icon-container bg-accent">
+                        <i class="fas fa-cubes"></i>
+                    </div>
+                    <h3>3D Web Experiences</h3>
+                    <p>Interactive 3D elements and experiences that engage users and make your site stand out from the crowd.</p>
+                    <div class="service-hover-line"></div>
+                </div>
+                
+                <div class="service-card" data-color="secondary">
+                    <div class="service-icon-container bg-secondary">
+                        <i class="fas fa-paint-brush"></i>
+                    </div>
+                    <h3>UI/UX Design</h3>
+                    <p>User-centered design solutions with intuitive interfaces and seamless user experiences that drive engagement.</p>
+                    <div class="service-hover-line"></div>
+                </div>
+                
+                <div class="service-card" data-color="primary">
+                    <div class="service-icon-container bg-primary">
+                        <i class="fas fa-magic"></i>
+                    </div>
+                    <h3>Animation & Effects</h3>
+                    <p>Stunning animations and visual effects that bring your website to life and create memorable user experiences.</p>
+                    <div class="service-hover-line"></div>
+                </div>
+                
+                <div class="service-card" data-color="accent">
+                    <div class="service-icon-container bg-accent">
+                        <i class="fas fa-mobile-alt"></i>
+                    </div>
+                    <h3>Responsive Design</h3>
+                    <p>Fully responsive websites that provide an optimal viewing experience across all devices and screen sizes.</p>
+                    <div class="service-hover-line"></div>
+                </div>
+                
+                <div class="service-card" data-color="secondary">
+                    <div class="service-icon-container bg-secondary">
+                        <i class="fas fa-bolt"></i>
+                    </div>
+                    <h3>Performance Optimization</h3>
+                    <p>Website speed and performance optimization to ensure fast loading times and smooth user experience.</p>
+                    <div class="service-hover-line"></div>
+                </div>
+            </div>
+            
+            <div class="services-cta">
+                <a href="#contact" id="services-button" class="btn btn-primary">
+                    <span>Get In Touch</span>
+                    <i class="fas fa-arrow-right"></i>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Projects Section -->
+    <section id="projects" class="section bg-dark-light">
+        <div class="container">
+            <div class="section-header">
+                <h2>My <span class="gradient-text">Projects</span></h2>
+                <div class="section-underline"></div>
+                <p class="section-description">Check out some of my recent work that showcases my skills and expertise.</p>
+            </div>
+            
+            <div class="projects-filter">
+                <button class="filter-btn active" data-filter="all">All</button>
+                <button class="filter-btn" data-filter="web">Web Development</button>
+                <button class="filter-btn" data-filter="3d">3D Experiences</button>
+                <button class="filter-btn" data-filter="ui">UI/UX Design</button>
+            </div>
+            
+            <div class="projects-grid">
+                <div class="project-card" data-category="web 3d">
+                    <div class="project-img">
+                        <img src="assets/project1.jpg" alt="E-commerce Website">
+                        <div class="project-overlay">
+                            <div class="project-links">
+                                <a href="#" target="_blank" rel="noopener noreferrer"><i class="fas fa-link"></i></a>
+                                <a href="#" target="_blank" rel="noopener noreferrer"><i class="fab fa-github"></i></a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="project-info">
+                        <h3>Modern E-commerce Platform</h3>
+                        <p>A fully responsive e-commerce website with 3D product previews and smooth animations.</p>
+                        <div class="project-tech">
+                            <span>HTML</span>
+                            <span>CSS</span>
+                            <span>JavaScript</span>
+                            <span>Three.js</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="project-card" data-category="3d">
+                    <div class="project-img">
+                        <img src="assets/project2.jpg" alt="3D Portfolio">
+                        <div class="project-overlay">
+                            <div class="project-links">
+                                <a href="#" target="_blank" rel="noopener noreferrer"><i class="fas fa-link"></i></a>
+                                <a href="#" target="_blank" rel="noopener noreferrer"><i class="fab fa-github"></i></a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="project-info">
+                        <h3>3D Interactive Portfolio</h3>
+                        <p>An immersive 3D portfolio website with interactive elements and creative animations.</p>
+                        <div class="project-tech">
+                            <span>Three.js</span>
+                            <span>GSAP</span>
+                            <span>WebGL</span>
+                            <span>JavaScript</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="project-card" data-category="ui web">
+                    <div class="project-img">
+                        <img src="assets/project3.jpg" alt="Travel App">
+                        <div class="project-overlay">
+                            <div class="project-links">
+                                <a href="#" target="_blank" rel="noopener noreferrer"><i class="fas fa-link"></i></a>
+                                <a href="#" target="_blank" rel="noopener noreferrer"><i class="fab fa-github"></i></a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="project-info">
+                        <h3>Travel Destination App</h3>
+                        <p>A travel application with dynamic content, interactive maps, and seamless user experience.</p>
+                        <div class="project-tech">
+                            <span>HTML</span>
+                            <span>CSS</span>
+                            <span>JavaScript</span>
+                            <span>API Integration</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="project-card" data-category="ui">
+                    <div class="project-img">
+                        <img src="assets/project4.jpg" alt="Dashboard UI">
+                        <div class="project-overlay">
+                            <div class="project-links">
+                                <a href="#" target="_blank" rel="noopener noreferrer"><i class="fas fa-link"></i></a>
+                                <a href="#" target="_blank" rel="noopener noreferrer"><i class="fab fa-github"></i></a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="project-info">
+                        <h3>Admin Dashboard UI</h3>
+                        <p>A clean and modern admin dashboard interface with data visualization and real-time updates.</p>
+                        <div class="project-tech">
+                            <span>UI/UX Design</span>
+                            <span>HTML/CSS</span>
+                            <span>JavaScript</span>
+                            <span>Chart.js</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="project-card" data-category="web 3d">
+                    <div class="project-img">
+                        <img src="assets/project5.jpg" alt="Product Configurator">
+                        <div class="project-overlay">
+                            <div class="project-links">
+                                <a href="#" target="_blank" rel="noopener noreferrer"><i class="fas fa-link"></i></a>
+                                <a href="#" target="_blank" rel="noopener noreferrer"><i class="fab fa-github"></i></a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="project-info">
+                        <h3>3D Product Configurator</h3>
+                        <p>Interactive 3D product configurator allowing users to customize and preview products in real-time.</p>
+                        <div class="project-tech">
+                            <span>Three.js</span>
+                            <span>JavaScript</span>
+                            <span>WebGL</span>
+                            <span>GSAP</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="project-card" data-category="ui web">
+                    <div class="project-img">
+                        <img src="assets/project6.jpg" alt="Restaurant Website">
+                        <div class="project-overlay">
+                            <div class="project-links">
+                                <a href="#" target="_blank" rel="noopener noreferrer"><i class="fas fa-link"></i></a>
+                                <a href="#" target="_blank" rel="noopener noreferrer"><i class="fab fa-github"></i></a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="project-info">
+                        <h3>Restaurant Website</h3>
+                        <p>A modern restaurant website with online ordering, menu viewing, and table reservation.</p>
+                        <div class="project-tech">
+                            <span>HTML/CSS</span>
+                            <span>JavaScript</span>
+                            <span>Responsive Design</span>
+                            <span>API Integration</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="projects-cta">
+                <a href="https://github.com/Moeed-ul-Hassan" target="_blank" rel="noopener noreferrer" class="btn btn-primary">
+                    <span>View More on GitHub</span>
+                    <i class="fab fa-github"></i>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Testimonials Section -->
+    <section id="testimonials" class="section bg-gradient">
+        <div class="bg-pattern"></div>
+        <div class="bg-blob bg-blob-1"></div>
+        <div class="bg-blob bg-blob-2"></div>
+        
+        <div class="container">
+            <div class="section-header">
+                <h2 id="testimonials-title">Client <span class="gradient-text">Testimonials</span></h2>
+                <div id="testimonials-underline" class="section-underline"></div>
+                <p id="testimonials-description" class="section-description">See what clients have to say about working with me and the results they've achieved with my services.</p>
+            </div>
+
+            <div id="testimonials-container" class="testimonials-container">
+                <div class="testimonials-slider">
+                    <div class="testimonial-card">
+                        <div class="testimonial-header">
+                            <div class="testimonial-img">
+                                <img src="https://images.unsplash.com/photo-1580489944761-15a19d654956?ixlib=rb-4.0.3&auto=format&fit=crop&w=200&q=80" alt="Sarah Johnson">
+                            </div>
+                            <div class="testimonial-author">
+                                <h4>Sarah Johnson</h4>
+                                <p class="testimonial-position">Marketing Director</p>
+                                <p class="testimonial-company">TechVision Inc.</p>
+                            </div>
+                        </div>
+                        <div class="testimonial-body">
+                            <i class="fas fa-quote-left"></i>
+                            <p class="testimonial-text">Moeed created an exceptional website for our company, incorporating 3D elements that truly brought our brand to life. The animations and interactivity are beyond what we imagined possible for a website.</p>
+                            <div class="testimonial-highlight"></div>
+                        </div>
+                    </div>
+                    
+                    <div class="testimonial-card">
+                        <div class="testimonial-header">
+                            <div class="testimonial-img">
+                                <img src="https://images.unsplash.com/photo-1568602471122-7832951cc4c5?ixlib=rb-4.0.3&auto=format&fit=crop&w=200&q=80" alt="David Chen">
+                            </div>
+                            <div class="testimonial-author">
+                                <h4>David Chen</h4>
+                                <p class="testimonial-position">Product Manager</p>
+                                <p class="testimonial-company">Innovate Solutions</p>
+                            </div>
+                        </div>
+                        <div class="testimonial-body">
+                            <i class="fas fa-quote-left"></i>
+                            <p class="testimonial-text">Working with Moeed was a fantastic experience. His attention to detail and creative approach to web design resulted in a website that not only looks amazing but also performs exceptionally well.</p>
+                            <div class="testimonial-highlight"></div>
+                        </div>
+                    </div>
+                    
+                    <div class="testimonial-card">
+                        <div class="testimonial-header">
+                            <div class="testimonial-img">
+                                <img src="https://images.unsplash.com/photo-1573497019940-1c28c88b4f3e?ixlib=rb-4.0.3&auto=format&fit=crop&w=200&q=80" alt="Emma Rodriguez">
+                            </div>
+                            <div class="testimonial-author">
+                                <h4>Emma Rodriguez</h4>
+                                <p class="testimonial-position">E-commerce Lead</p>
+                                <p class="testimonial-company">StyleTrend</p>
+                            </div>
+                        </div>
+                        <div class="testimonial-body">
+                            <i class="fas fa-quote-left"></i>
+                            <p class="testimonial-text">Our e-commerce site needed a complete overhaul, and Moeed delivered beyond our expectations. The interactive elements he added have significantly improved user engagement and conversion rates.</p>
+                            <div class="testimonial-highlight"></div>
+                        </div>
+                    </div>
+                    
+                    <div class="testimonial-card">
+                        <div class="testimonial-header">
+                            <div class="testimonial-img">
+                                <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?ixlib=rb-4.0.3&auto=format&fit=crop&w=200&q=80" alt="Michael Thompson">
+                            </div>
+                            <div class="testimonial-author">
+                                <h4>Michael Thompson</h4>
+                                <p class="testimonial-position">CEO</p>
+                                <p class="testimonial-company">Digital Craft</p>
+                            </div>
+                        </div>
+                        <div class="testimonial-body">
+                            <i class="fas fa-quote-left"></i>
+                            <p class="testimonial-text">Moeed's expertise in both design and development is rare to find. He created a 3D interactive product showcase for our website that has completely transformed how customers interact with our products.</p>
+                            <div class="testimonial-highlight"></div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="testimonials-navigation">
+                    <button class="testimonials-prev" aria-label="Previous testimonial">
+                        <i class="fas fa-arrow-left"></i>
+                    </button>
+                    
+                    <div class="testimonials-dots">
+                        <button class="testimonial-dot active" data-index="0" aria-label="Go to testimonial 1"></button>
+                        <button class="testimonial-dot" data-index="1" aria-label="Go to testimonial 2"></button>
+                        <button class="testimonial-dot" data-index="2" aria-label="Go to testimonial 3"></button>
+                        <button class="testimonial-dot" data-index="3" aria-label="Go to testimonial 4"></button>
+                    </div>
+                    
+                    <button class="testimonials-next" aria-label="Next testimonial">
+                        <i class="fas fa-arrow-right"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="section">
+        <div class="container">
+            <div class="section-header">
+                <h2>Get In <span class="gradient-text">Touch</span></h2>
+                <div class="section-underline"></div>
+                <p class="section-description">Feel free to contact me for any work or suggestions. I'll get back to you as soon as possible.</p>
+            </div>
+            
+            <div class="contact-container">
+                <div class="contact-info">
+                    <h3 class="gradient-text">Contact Information</h3>
+                    <p>Feel free to get in touch with me for any kind of collaboration or consultation. I'm always open to discussing new projects, creative ideas or opportunities.</p>
+                    
+                    <div class="contact-details">
+                        <div class="contact-item">
+                            <div class="contact-icon bg-primary">
+                                <i class="fas fa-envelope"></i>
+                            </div>
+                            <div class="contact-text">
+                                <h4>Email</h4>
+                                <p>moeed@example.com</p>
+                            </div>
+                        </div>
+                        
+                        <div class="contact-item">
+                            <div class="contact-icon bg-secondary">
+                                <i class="fas fa-map-marker-alt"></i>
+                            </div>
+                            <div class="contact-text">
+                                <h4>Location</h4>
+                                <p>Islamabad, Pakistan</p>
+                            </div>
+                        </div>
+                        
+                        <div class="contact-item">
+                            <div class="contact-icon bg-accent">
+                                <i class="fas fa-user-clock"></i>
+                            </div>
+                            <div class="contact-text">
+                                <h4>Working Hours</h4>
+                                <p>Mon - Fri: 9am - 5pm</p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="contact-social">
+                        <a href="#" target="_blank" rel="noopener noreferrer" class="social-icon">
+                            <i class="fab fa-github"></i>
+                        </a>
+                        <a href="#" target="_blank" rel="noopener noreferrer" class="social-icon">
+                            <i class="fab fa-linkedin"></i>
+                        </a>
+                        <a href="#" target="_blank" rel="noopener noreferrer" class="social-icon">
+                            <i class="fab fa-twitter"></i>
+                        </a>
+                        <a href="#" target="_blank" rel="noopener noreferrer" class="social-icon">
+                            <i class="fab fa-dribbble"></i>
+                        </a>
+                    </div>
+                </div>
+                
+                <div class="contact-form-container">
+                    <form id="contact-form" class="contact-form">
+                        <div class="form-group">
+                            <label for="name">Name</label>
+                            <input type="text" id="name" name="name" placeholder="Your Name" required>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="email">Email</label>
+                            <input type="email" id="email" name="email" placeholder="Your Email" required>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="subject">Subject</label>
+                            <input type="text" id="subject" name="subject" placeholder="Subject" required>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="message">Message</label>
+                            <textarea id="message" name="message" placeholder="Your Message" rows="6" required></textarea>
+                        </div>
+                        
+                        <button type="submit" class="btn btn-primary submit-btn">
+                            <span>Send Message</span>
+                            <i class="fas fa-paper-plane"></i>
+                        </button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer Section -->
+    <footer id="footer" class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-brand">
+                    <a href="#" class="footer-logo">
+                        <span class="gradient-text">Moeed</span><span>.</span>
+                    </a>
+                    <p class="footer-description">
+                        Creating immersive digital experiences with clean code and cutting-edge design.
+                    </p>
+                </div>
+                
+                <div class="footer-links">
+                    <div class="footer-section">
+                        <h3>Quick Links</h3>
+                        <ul>
+                            <li><a href="#home">Home</a></li>
+                            <li><a href="#about">About</a></li>
+                            <li><a href="#skills">Skills</a></li>
+                            <li><a href="#services">Services</a></li>
+                            <li><a href="#projects">Projects</a></li>
+                            <li><a href="#contact">Contact</a></li>
+                        </ul>
+                    </div>
+                    
+                    <div class="footer-section">
+                        <h3>Services</h3>
+                        <ul>
+                            <li><a href="#services">Web Development</a></li>
+                            <li><a href="#services">3D Web Experiences</a></li>
+                            <li><a href="#services">UI/UX Design</a></li>
+                            <li><a href="#services">Animation & Effects</a></li>
+                            <li><a href="#services">Responsive Design</a></li>
+                        </ul>
+                    </div>
+                    
+                    <div class="footer-section">
+                        <h3>Contact</h3>
+                        <ul>
+                            <li><a href="mailto:moeed@example.com">moeed@example.com</a></li>
+                            <li>Islamabad, Pakistan</li>
+                            <li>Available for Freelance</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="footer-bottom">
+                <p class="copyright">&copy; 2025 Moeed-ul-Hassan. All rights reserved.</p>
+                <div class="footer-social">
+                    <a href="#" target="_blank" rel="noopener noreferrer">
+                        <i class="fab fa-github"></i>
+                    </a>
+                    <a href="#" target="_blank" rel="noopener noreferrer">
+                        <i class="fab fa-linkedin"></i>
+                    </a>
+                    <a href="#" target="_blank" rel="noopener noreferrer">
+                        <i class="fab fa-twitter"></i>
+                    </a>
+                    <a href="#" target="_blank" rel="noopener noreferrer">
+                        <i class="fab fa-dribbble"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Back to Top Button -->
+    <button id="back-to-top" class="back-to-top" aria-label="Back to top">
+        <i class="fas fa-arrow-up"></i>
+    </button>
+
+    <!-- Scripts -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.11.4/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.11.4/ScrollTrigger.min.js"></script>
+    <script src="js/terminal.js"></script>
+    <script src="js/three-scene.js"></script>
+    <script src="js/script.js"></script>
+</body>
+</html>
