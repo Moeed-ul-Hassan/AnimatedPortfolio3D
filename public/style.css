@@ -1957,6 +1957,234 @@ p {
 
 /* 
 =======================
+    Interview Prep Section 
+======================= 
+*/
+.interview-prep-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(500px, 1fr));
+    gap: 2rem;
+    margin-top: 3rem;
+}
+
+.interview-company-card {
+    background-color: var(--color-dark);
+    border-radius: var(--border-radius-lg);
+    padding: 2rem;
+    box-shadow: var(--shadow-lg);
+    transition: all 0.3s ease;
+    border: 1px solid rgba(255, 255, 255, 0.05);
+    position: relative;
+    overflow: hidden;
+}
+
+.ms-interview {
+    background: linear-gradient(to bottom right, 
+        rgba(0, 120, 212, 0.05) 0%, 
+        rgba(0, 120, 212, 0.01) 100%);
+    border-bottom: 3px solid var(--color-microsoft-blue);
+}
+
+.google-interview {
+    background: linear-gradient(to bottom right, 
+        rgba(66, 133, 244, 0.05) 0%, 
+        rgba(66, 133, 244, 0.01) 100%);
+    border-bottom: 3px solid var(--color-google-blue);
+}
+
+.interview-company-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 15px 30px rgba(0, 0, 0, 0.2);
+}
+
+.ms-interview:hover {
+    box-shadow: 0 15px 30px rgba(0, 120, 212, 0.1);
+}
+
+.google-interview:hover {
+    box-shadow: 0 15px 30px rgba(66, 133, 244, 0.1);
+}
+
+.interview-company-header {
+    display: flex;
+    align-items: center;
+    margin-bottom: 2rem;
+    padding-bottom: 1rem;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.interview-company-logo {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 2rem;
+    margin-right: 1rem;
+}
+
+.ms-interview .interview-company-logo {
+    color: var(--color-microsoft-blue);
+    background-color: rgba(0, 120, 212, 0.1);
+}
+
+.google-interview .interview-company-logo {
+    color: var(--color-google-blue);
+    background-color: rgba(66, 133, 244, 0.1);
+}
+
+.interview-company-header h3 {
+    color: var(--color-text);
+    margin: 0;
+    font-size: 1.5rem;
+}
+
+.interview-topics {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+    margin-bottom: 2rem;
+}
+
+.interview-topic {
+    display: flex;
+    gap: 1rem;
+}
+
+.interview-topic-icon {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.2rem;
+    flex-shrink: 0;
+}
+
+.ms-interview .interview-topic-icon {
+    color: var(--color-microsoft-blue);
+    background-color: rgba(0, 120, 212, 0.1);
+}
+
+.google-interview .interview-topic-icon {
+    color: var(--color-google-blue);
+    background-color: rgba(66, 133, 244, 0.1);
+}
+
+.interview-topic-content {
+    flex: 1;
+}
+
+.interview-topic h4 {
+    margin: 0 0 0.5rem 0;
+    font-size: 1.1rem;
+    color: var(--color-text);
+}
+
+.interview-progress-container {
+    height: 6px;
+    background-color: rgba(255, 255, 255, 0.1);
+    border-radius: var(--border-radius-full);
+    margin-bottom: 0.5rem;
+    overflow: hidden;
+}
+
+.interview-progress {
+    height: 100%;
+    border-radius: var(--border-radius-full);
+    transition: width 1.5s cubic-bezier(0.1, 0.5, 0.5, 1);
+}
+
+.ms-interview .interview-progress {
+    background: linear-gradient(to right, var(--color-microsoft-blue), var(--color-microsoft-light-blue));
+}
+
+.google-interview .interview-progress {
+    background: linear-gradient(to right, var(--color-google-blue), var(--color-google-green));
+}
+
+.interview-topic p {
+    margin: 0;
+    font-size: 0.9rem;
+    color: var(--color-text-secondary);
+}
+
+.interview-resources {
+    background-color: rgba(255, 255, 255, 0.05);
+    border-radius: var(--border-radius-md);
+    padding: 1.5rem;
+}
+
+.interview-resources h4 {
+    margin: 0 0 1rem 0;
+    font-size: 1.1rem;
+    color: var(--color-text);
+}
+
+.interview-resources ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.interview-resources li {
+    display: flex;
+    align-items: center;
+    margin-bottom: 0.75rem;
+    color: var(--color-text-secondary);
+    font-size: 0.95rem;
+}
+
+.interview-resources li i {
+    margin-right: 0.75rem;
+    width: 20px;
+    text-align: center;
+}
+
+.ms-interview .interview-resources li i {
+    color: var(--color-microsoft-light-blue);
+}
+
+.google-interview .interview-resources li i {
+    color: var(--color-google-green);
+}
+
+.interview-prep-footer {
+    text-align: center;
+    margin-top: 3rem;
+    padding-top: 2rem;
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.interview-prep-footer p {
+    margin-bottom: 1.5rem;
+    color: var(--color-text-secondary);
+    max-width: 700px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+@media (max-width: 1024px) {
+    .interview-prep-grid {
+        grid-template-columns: 1fr;
+    }
+}
+
+@media (max-width: 768px) {
+    .interview-topic {
+        flex-direction: column;
+        gap: 0.5rem;
+    }
+    
+    .interview-topic-icon {
+        margin-bottom: 0.5rem;
+    }
+}
+
+/* 
+=======================
     Contact Section 
 ======================= 
 */
