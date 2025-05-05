@@ -1,0 +1,344 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LeetCode Problem Generator | Microsoft & Google Prep</title>
+    <meta name="description" content="Random LeetCode problem generator to help you prepare for Microsoft and Google technical interviews with curated problems frequently asked in top tech companies.">
+    
+    <!-- Microsoft & Google specific meta tags -->
+    <meta name="keywords" content="LeetCode generator, Microsoft interview problems, Google interview problems, coding interview practice, algorithm training, data structures, technical interview prep">
+    
+    <!-- Favicon -->
+    <link rel="icon" type="image/png" href="/assets/favicon.png">
+    
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Open+Sans:wght@300;400;600&family=Fira+Code:wght@400;500&display=swap" rel="stylesheet">
+    
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="/style.css">
+    <link rel="stylesheet" href="/css/leetcode-generator.css">
+    
+    <style>
+        body {
+            padding-top: 80px;
+        }
+
+        /* Custom navbar for this page */
+        .navbar-leetcode {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 80px;
+            background-color: var(--color-dark);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0 2rem;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+            z-index: 1000;
+        }
+        
+        .navbar-logo {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            font-family: var(--font-poppins);
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--color-text);
+        }
+        
+        .navbar-logo span {
+            background: linear-gradient(90deg, var(--color-microsoft-blue), var(--color-google-blue));
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+        }
+        
+        .navbar-back {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            color: var(--color-text);
+            font-weight: 500;
+            transition: all 0.3s ease;
+            font-size: 0.95rem;
+        }
+        
+        .navbar-back:hover {
+            color: var(--color-primary);
+            transform: translateX(-5px);
+        }
+        
+        .leetcode-page-content {
+            padding: 3rem 1.5rem;
+        }
+        
+        .page-section {
+            margin-bottom: 4rem;
+        }
+        
+        .page-header {
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+        
+        .page-header h1 {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+            color: var(--color-text);
+        }
+        
+        .page-header p {
+            color: var(--color-text-secondary);
+            max-width: 700px;
+            margin: 0 auto;
+        }
+        
+        .interview-tips {
+            margin-top: 4rem;
+            padding: 2rem;
+            background-color: var(--color-dark-light);
+            border-radius: var(--border-radius-lg);
+            box-shadow: var(--shadow-lg);
+        }
+        
+        .interview-tips h2 {
+            margin-bottom: 1.5rem;
+            text-align: center;
+            color: var(--color-text);
+        }
+        
+        .tips-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+        
+        .tip-card {
+            background-color: var(--color-dark);
+            border-radius: var(--border-radius-md);
+            padding: 1.5rem;
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            transition: all 0.3s ease;
+        }
+        
+        .tip-card:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--shadow-md);
+        }
+        
+        .tip-icon {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            background-color: rgba(108, 99, 255, 0.1);
+            color: var(--color-primary);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            margin-bottom: 1.25rem;
+        }
+        
+        .tip-card h3 {
+            margin-bottom: 1rem;
+            color: var(--color-text);
+            font-size: 1.25rem;
+        }
+        
+        .tip-card p {
+            color: var(--color-text-secondary);
+            font-size: 0.95rem;
+            line-height: 1.6;
+        }
+        
+        .ms-google-footer {
+            margin-top: 4rem;
+            text-align: center;
+            padding-top: 2rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        
+        .ms-google-footer .btn {
+            margin-top: 1.5rem;
+        }
+    </style>
+</head>
+<body>
+    <!-- Navbar -->
+    <nav class="navbar-leetcode">
+        <a href="/ms-google-prep.html" class="navbar-back">
+            <i class="fas fa-arrow-left"></i>
+            Back to Interview Prep
+        </a>
+        
+        <div class="navbar-logo">
+            <i class="fas fa-code"></i>
+            <span>LeetCode Generator</span>
+        </div>
+        
+        <a href="/" class="navbar-back">
+            <i class="fas fa-home"></i>
+            Portfolio Home
+        </a>
+    </nav>
+    
+    <!-- Page Content -->
+    <div class="leetcode-page-content">
+        <section class="page-section">
+            <div class="page-header">
+                <h1>Random <span class="gradient-text">LeetCode</span> Problem Generator</h1>
+                <p>Practice with curated problems frequently asked in Microsoft and Google technical interviews. Sharpen your skills with problems of varying difficulty levels.</p>
+            </div>
+            
+            <!-- LeetCode Problem Generator -->
+            <div class="leetcode-generator-container">
+                <div class="leetcode-header">
+                    <h2>Generate a Random Problem</h2>
+                    <p>Select a difficulty level or specific company focus to generate a random LeetCode problem for practice.</p>
+                </div>
+                
+                <div class="difficulty-controls">
+                    <button class="difficulty-btn active" data-difficulty="all">
+                        <i class="fas fa-random"></i>
+                        All Problems
+                    </button>
+                    <button class="difficulty-btn easy" data-difficulty="easy">
+                        <i class="fas fa-smile"></i>
+                        Easy
+                    </button>
+                    <button class="difficulty-btn medium" data-difficulty="medium">
+                        <i class="fas fa-meh"></i>
+                        Medium
+                    </button>
+                    <button class="difficulty-btn hard" data-difficulty="hard">
+                        <i class="fas fa-frown"></i>
+                        Hard
+                    </button>
+                    <button class="difficulty-btn microsoft" data-difficulty="microsoft">
+                        <i class="fab fa-microsoft"></i>
+                        Microsoft Focus
+                    </button>
+                    <button class="difficulty-btn google" data-difficulty="google">
+                        <i class="fab fa-google"></i>
+                        Google Focus
+                    </button>
+                </div>
+                
+                <div id="leetcode-problem">
+                    <!-- Problem will be displayed here via JavaScript -->
+                    <div class="loading-problem">
+                        <div class="spinner"></div>
+                        <p>Generating a random problem...</p>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Interview Tips Section -->
+            <div class="interview-tips">
+                <h2>How to Ace Technical Interviews</h2>
+                
+                <div class="tips-grid">
+                    <div class="tip-card">
+                        <div class="tip-icon">
+                            <i class="fas fa-clipboard-list"></i>
+                        </div>
+                        <h3>Problem Solving Approach</h3>
+                        <p>Start by clarifying the problem, identify edge cases, think of a brute force solution, then optimize. Always explain your thought process - this is as important as the solution itself.</p>
+                    </div>
+                    
+                    <div class="tip-card">
+                        <div class="tip-icon">
+                            <i class="fas fa-clock"></i>
+                        </div>
+                        <h3>Time Management</h3>
+                        <p>Allocate time effectively: ~5 minutes for understanding the problem, ~15-20 minutes for solution development, and ~5 minutes for testing. Practice with a timer to build this skill.</p>
+                    </div>
+                    
+                    <div class="tip-card">
+                        <div class="tip-icon">
+                            <i class="fas fa-comment"></i>
+                        </div>
+                        <h3>Communication</h3>
+                        <p>Think out loud and explain your approach before coding. Use clear variable names and add comments. Ask for clarification when needed and be receptive to hints.</p>
+                    </div>
+                    
+                    <div class="tip-card">
+                        <div class="tip-icon">
+                            <i class="fas fa-bug"></i>
+                        </div>
+                        <h3>Testing & Debugging</h3>
+                        <p>After coding, trace through your solution with a simple example. Look for edge cases: empty inputs, single elements, duplicates, etc. Fix bugs methodically.</p>
+                    </div>
+                    
+                    <div class="tip-card">
+                        <div class="tip-icon">
+                            <i class="fas fa-calendar-check"></i>
+                        </div>
+                        <h3>Consistent Practice</h3>
+                        <p>Practice daily with a mix of problems. Focus on understanding patterns rather than memorizing solutions. Review and optimize previous solutions regularly.</p>
+                    </div>
+                    
+                    <div class="tip-card">
+                        <div class="tip-icon">
+                            <i class="fas fa-lightbulb"></i>
+                        </div>
+                        <h3>Pattern Recognition</h3>
+                        <p>Learn to recognize common patterns like two pointers, sliding window, BFS/DFS, dynamic programming, etc. This helps tackle new problems by applying known strategies.</p>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Footer Section -->
+            <div class="ms-google-footer">
+                <p>Continue your preparation with more Microsoft and Google interview resources.</p>
+                <a href="/ms-google-prep.html" class="btn btn-primary">
+                    <i class="fas fa-arrow-left"></i>
+                    <span>Back to Interview Prep</span>
+                </a>
+            </div>
+        </section>
+    </div>
+    
+    <!-- Scripts -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.11.4/gsap.min.js"></script>
+    <script src="/js/leetcode-generator.js"></script>
+    
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Animate elements with GSAP
+            gsap.from('.page-header', {
+                opacity: 0,
+                y: 30,
+                duration: 1,
+                ease: "power3.out"
+            });
+            
+            gsap.from('.leetcode-generator-container', {
+                opacity: 0,
+                y: 30,
+                duration: 1,
+                delay: 0.3,
+                ease: "power3.out"
+            });
+            
+            gsap.from('.tip-card', {
+                opacity: 0,
+                y: 30,
+                duration: 0.8,
+                stagger: 0.1,
+                delay: 0.5,
+                ease: "power3.out"
+            });
+        });
+    </script>
+</body>
+</html>
