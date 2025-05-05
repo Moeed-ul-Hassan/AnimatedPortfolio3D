@@ -2403,6 +2403,28 @@ p {
     transform: translateX(5px);
 }
 
+.ms-google-link {
+    background: linear-gradient(90deg, var(--color-microsoft-blue), var(--color-google-blue));
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent !important;
+    font-weight: 600;
+    position: relative;
+}
+
+.ms-google-link::after {
+    content: 'New';
+    position: absolute;
+    top: -8px;
+    right: -30px;
+    background: linear-gradient(90deg, var(--color-microsoft-blue), var(--color-google-blue));
+    color: white;
+    font-size: 0.6rem;
+    padding: 2px 6px;
+    border-radius: 10px;
+    font-weight: bold;
+}
+
 .footer-bottom {
     display: flex;
     flex-direction: column;

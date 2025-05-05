@@ -1,0 +1,566 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Microsoft & Google Interview Preparation - Moeed-ul-Hassan</title>
+    <meta name="description" content="Moeed-ul-Hassan's dedicated preparation for Microsoft and Google technical interviews, showcasing skills in algorithms, system design, and company-specific technologies.">
+    
+    <!-- Microsoft & Google specific meta tags -->
+    <meta name="keywords" content="Microsoft interview prep, Google interview prep, software engineer interview, coding interview, system design interview, Microsoft technologies, Google technologies, Azure, GCP, .NET, Angular, TypeScript">
+    
+    <!-- Favicon -->
+    <link rel="icon" type="image/png" href="/assets/favicon.png">
+    
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Open+Sans:wght@300;400;600&family=Fira+Code:wght@400;500&display=swap" rel="stylesheet">
+    
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="/style.css">
+    
+    <!-- Company-specific colors -->
+    <style>
+        .microsoft-header {
+            background: linear-gradient(135deg, var(--color-microsoft-dark-blue), var(--color-microsoft-blue));
+        }
+        
+        .google-header {
+            background: linear-gradient(135deg, var(--color-google-blue), var(--color-google-green));
+        }
+        
+        .company-logo-large {
+            font-size: 5rem;
+            margin-bottom: 1rem;
+            text-shadow: 0 10px 20px rgba(0,0,0,0.2);
+        }
+        
+        .header-banner {
+            text-align: center;
+            padding: 6rem 2rem;
+            color: white;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .header-banner::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMTAwJSIgaGVpZ2h0PSIxMDAlIiB2aWV3Qm94PSIwIDAgMTAwMCAxMDAwIiBwcmVzZXJ2ZUFzcGVjdFJhdGlvPSJub25lIiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciPjxnIGZpbGwtb3BhY2l0eT0iMC4wOCI+PGNpcmNsZSBjeD0iMTAwIiBjeT0iMTAwIiByPSIxMCI+PC9jaXJjbGU+PGNpcmNsZSBjeD0iMjAwIiBjeT0iMjAwIiByPSIxMCI+PC9jaXJjbGU+PGNpcmNsZSBjeD0iMzAwIiBjeT0iMzAwIiByPSIxMCI+PC9jaXJjbGU+PGNpcmNsZSBjeD0iNDAwIiBjeT0iNDAwIiByPSIxMCI+PC9jaXJjbGU+PGNpcmNsZSBjeD0iNTAwIiBjeT0iNTAwIiByPSIxMCI+PC9jaXJjbGU+PGNpcmNsZSBjeD0iNjAwIiBjeT0iNjAwIiByPSIxMCI+PC9jaXJjbGU+PGNpcmNsZSBjeD0iNzAwIiBjeT0iNzAwIiByPSIxMCI+PC9jaXJjbGU+PGNpcmNsZSBjeD0iODAwIiBjeT0iODAwIiByPSIxMCI+PC9jaXJjbGU+PGNpcmNsZSBjeD0iOTAwIiBjeT0iOTAwIiByPSIxMCI+PC9jaXJjbGU+PGNpcmNsZSBjeD0iMTUwIiBjeT0iMTUwIiByPSIxMCI+PC9jaXJjbGU+PGNpcmNsZSBjeD0iMjUwIiBjeT0iMjUwIiByPSIxMCI+PC9jaXJjbGU+PGNpcmNsZSBjeD0iMzUwIiBjeT0iMzUwIiByPSIxMCI+PC9jaXJjbGU+PGNpcmNsZSBjeD0iNDUwIiBjeT0iNDUwIiByPSIxMCI+PC9jaXJjbGU+PGNpcmNsZSBjeD0iNTUwIiBjeT0iNTUwIiByPSIxMCI+PC9jaXJjbGU+PGNpcmNsZSBjeD0iNjUwIiBjeT0iNjUwIiByPSIxMCI+PC9jaXJjbGU+PGNpcmNsZSBjeD0iNzUwIiBjeT0iNzUwIiByPSIxMCI+PC9jaXJjbGU+PGNpcmNsZSBjeD0iODUwIiBjeT0iODUwIiByPSIxMCI+PC9jaXJjbGU+PGNpcmNsZSBjeD0iOTUwIiBjeT0iOTUwIiByPSIxMCI+PC9jaXJjbGU+PC9nPjwvc3ZnPg==');
+            opacity: 0.3;
+            pointer-events: none;
+        }
+        
+        .back-to-portfolio {
+            position: absolute;
+            top: 2rem;
+            left: 2rem;
+            color: white;
+            text-decoration: none;
+            font-weight: 500;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            transition: all 0.3s ease;
+            z-index: 10;
+        }
+        
+        .back-to-portfolio:hover {
+            transform: translateX(-5px);
+        }
+        
+        .interview-company-large {
+            margin-bottom: 4rem;
+            padding: 2rem;
+            border-radius: var(--border-radius-lg);
+            box-shadow: var(--shadow-xl);
+        }
+        
+        .ms-interview-large {
+            background: linear-gradient(to bottom right, 
+                rgba(0, 120, 212, 0.05) 0%, 
+                rgba(0, 120, 212, 0.02) 100%);
+            border: 1px solid rgba(0, 120, 212, 0.2);
+        }
+        
+        .google-interview-large {
+            background: linear-gradient(to bottom right, 
+                rgba(66, 133, 244, 0.05) 0%, 
+                rgba(66, 133, 244, 0.02) 100%);
+            border: 1px solid rgba(66, 133, 244, 0.2);
+        }
+        
+        .detailed-topics {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-bottom: 3rem;
+        }
+        
+        .detailed-topic-card {
+            background-color: var(--color-dark-light);
+            border-radius: var(--border-radius-md);
+            padding: 1.5rem;
+            box-shadow: var(--shadow-md);
+            transition: all 0.3s ease;
+        }
+        
+        .detailed-topic-card:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--shadow-lg);
+        }
+        
+        .detailed-topic-card h4 {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            margin-bottom: 1rem;
+            color: var(--color-text);
+            font-size: 1.25rem;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            padding-bottom: 0.75rem;
+        }
+        
+        .detailed-topic-card ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+        
+        .detailed-topic-card li {
+            display: flex;
+            align-items: center;
+            margin-bottom: 0.75rem;
+            color: var(--color-text-secondary);
+            font-size: 0.95rem;
+        }
+        
+        .detailed-topic-card li i {
+            margin-right: 0.75rem;
+            font-size: 0.8rem;
+        }
+        
+        .ms-interview-large .detailed-topic-card li i {
+            color: var(--color-microsoft-light-blue);
+        }
+        
+        .google-interview-large .detailed-topic-card li i {
+            color: var(--color-google-green);
+        }
+        
+        .company-resources {
+            background-color: rgba(255, 255, 255, 0.03);
+            border-radius: var(--border-radius-lg);
+            padding: 2rem;
+            margin-top: 3rem;
+        }
+        
+        .company-resources h3 {
+            margin-bottom: 1.5rem;
+            color: var(--color-text);
+            font-size: 1.5rem;
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+        }
+        
+        .resource-list {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 1.5rem;
+        }
+        
+        .resource-item {
+            background-color: var(--color-dark);
+            border-radius: var(--border-radius-md);
+            padding: 1.25rem;
+            transition: all 0.3s ease;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .resource-item:hover {
+            transform: translateY(-3px);
+            box-shadow: var(--shadow-md);
+        }
+        
+        .resource-item h4 {
+            margin-bottom: 0.75rem;
+            color: var(--color-text);
+            font-size: 1.1rem;
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+        }
+        
+        .resource-item p {
+            color: var(--color-text-secondary);
+            font-size: 0.9rem;
+            margin-bottom: 1rem;
+            flex: 1;
+        }
+        
+        .resource-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            color: var(--color-text-secondary);
+            transition: all 0.3s ease;
+            font-size: 0.9rem;
+            margin-top: auto;
+        }
+        
+        .ms-interview-large .resource-link:hover {
+            color: var(--color-microsoft-light-blue);
+        }
+        
+        .google-interview-large .resource-link:hover {
+            color: var(--color-google-green);
+        }
+        
+        .section-wrap {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+        
+        .section-lead {
+            text-align: center;
+            max-width: 800px;
+            margin: 0 auto 4rem;
+        }
+        
+        @media (max-width: 768px) {
+            .company-logo-large {
+                font-size: 3rem;
+            }
+            
+            .back-to-portfolio {
+                top: 1rem;
+                left: 1rem;
+            }
+            
+            .header-banner {
+                padding: 5rem 1rem 3rem;
+            }
+            
+            .section-wrap {
+                padding: 0 1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header Section with Microsoft Banner -->
+    <div class="header-banner microsoft-header">
+        <a href="/" class="back-to-portfolio">
+            <i class="fas fa-arrow-left"></i>
+            Back to Portfolio
+        </a>
+        
+        <div class="company-logo-large">
+            <i class="fab fa-microsoft"></i>
+        </div>
+        <h1>Microsoft Interview Preparation</h1>
+        <p>My structured approach to mastering Microsoft technical interviews</p>
+    </div>
+    
+    <!-- Microsoft Interview Prep Content -->
+    <section class="section">
+        <div class="section-wrap">
+            <div class="section-lead">
+                <h2>My <span class="gradient-text">Microsoft</span> Preparation Strategy</h2>
+                <p>I'm dedicated to joining Microsoft as a software engineer, and have created a comprehensive preparation plan targeting Microsoft's specific interview process. Here's my systematic approach to preparing for Microsoft technical interviews.</p>
+            </div>
+            
+            <div class="interview-company-large ms-interview-large">
+                <h3 class="gradient-text">Technical Interview Focus Areas</h3>
+                
+                <div class="detailed-topics">
+                    <div class="detailed-topic-card">
+                        <h4><i class="fas fa-code"></i> Data Structures & Algorithms</h4>
+                        <ul>
+                            <li><i class="fas fa-check-circle"></i> Arrays & Strings</li>
+                            <li><i class="fas fa-check-circle"></i> Linked Lists & Trees</li>
+                            <li><i class="fas fa-check-circle"></i> Graphs & Dynamic Programming</li>
+                            <li><i class="fas fa-check-circle"></i> Sorting & Searching</li>
+                            <li><i class="fas fa-check-circle"></i> Recursion & Backtracking</li>
+                            <li><i class="fas fa-check-circle"></i> Tree Balancing</li>
+                            <li><i class="fas fa-check-circle"></i> Time & Space Complexity</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="detailed-topic-card">
+                        <h4><i class="fas fa-sitemap"></i> System Design</h4>
+                        <ul>
+                            <li><i class="fas fa-check-circle"></i> Azure Architecture Patterns</li>
+                            <li><i class="fas fa-check-circle"></i> Microservices Design</li>
+                            <li><i class="fas fa-check-circle"></i> Scalability & Performance</li>
+                            <li><i class="fas fa-check-circle"></i> API Design & Implementation</li>
+                            <li><i class="fas fa-check-circle"></i> Database Optimization</li>
+                            <li><i class="fas fa-check-circle"></i> Caching Strategies</li>
+                            <li><i class="fas fa-check-circle"></i> Load Balancing & Redundancy</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="detailed-topic-card">
+                        <h4><i class="fas fa-cogs"></i> Microsoft Technologies</h4>
+                        <ul>
+                            <li><i class="fas fa-check-circle"></i> Azure Cloud Services</li>
+                            <li><i class="fas fa-check-circle"></i> .NET Core Framework</li>
+                            <li><i class="fas fa-check-circle"></i> TypeScript & JavaScript</li>
+                            <li><i class="fas fa-check-circle"></i> C# Programming Language</li>
+                            <li><i class="fas fa-check-circle"></i> Microsoft Graph API</li>
+                            <li><i class="fas fa-check-circle"></i> Azure DevOps</li>
+                            <li><i class="fas fa-check-circle"></i> Office 365 Integrations</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="detailed-topic-card">
+                        <h4><i class="fas fa-people-carry"></i> Behavioral & Leadership</h4>
+                        <ul>
+                            <li><i class="fas fa-check-circle"></i> Growth Mindset</li>
+                            <li><i class="fas fa-check-circle"></i> Team Collaboration</li>
+                            <li><i class="fas fa-check-circle"></i> Problem-Solving Approach</li>
+                            <li><i class="fas fa-check-circle"></i> Customer Focus</li>
+                            <li><i class="fas fa-check-circle"></i> Ownership & Accountability</li>
+                            <li><i class="fas fa-check-circle"></i> Communication Skills</li>
+                            <li><i class="fas fa-check-circle"></i> Technical Leadership</li>
+                        </ul>
+                    </div>
+                </div>
+                
+                <div class="company-resources">
+                    <h3><i class="fas fa-book"></i> Microsoft Interview Resources</h3>
+                    
+                    <div class="resource-list">
+                        <div class="resource-item">
+                            <h4><i class="fas fa-laptop-code"></i> LeetCode Microsoft Collection</h4>
+                            <p>I've solved over 200 Microsoft-specific problems from LeetCode's premium collection to understand the patterns and complexity of questions asked in actual Microsoft interviews.</p>
+                            <span class="resource-link">
+                                <i class="fas fa-external-link-alt"></i> Subscription Resource
+                            </span>
+                        </div>
+                        
+                        <div class="resource-item">
+                            <h4><i class="fas fa-graduation-cap"></i> Microsoft Learn Platform</h4>
+                            <p>Completing Microsoft's official training paths for Azure, .NET, and other technologies to ensure I'm familiar with their ecosystem and best practices.</p>
+                            <a href="https://learn.microsoft.com/" target="_blank" rel="noopener noreferrer" class="resource-link">
+                                <i class="fas fa-external-link-alt"></i> Visit Resource
+                            </a>
+                        </div>
+                        
+                        <div class="resource-item">
+                            <h4><i class="fas fa-book"></i> Cracking the Coding Interview</h4>
+                            <p>Working through this book with a focus on the Microsoft-specific advice and practicing the example problems using the Microsoft-recommended approach.</p>
+                            <span class="resource-link">
+                                <i class="fas fa-external-link-alt"></i> Book Resource
+                            </span>
+                        </div>
+                        
+                        <div class="resource-item">
+                            <h4><i class="fas fa-users"></i> Microsoft Mock Interviews</h4>
+                            <p>Participating in mock interviews with professionals who have experience with Microsoft's interview process to get feedback on my approach and areas for improvement.</p>
+                            <span class="resource-link">
+                                <i class="fas fa-external-link-alt"></i> Practice Resource
+                            </span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Header Section with Google Banner -->
+    <div class="header-banner google-header">
+        <div class="company-logo-large">
+            <i class="fab fa-google"></i>
+        </div>
+        <h1>Google Interview Preparation</h1>
+        <p>My structured approach to mastering Google technical interviews</p>
+    </div>
+    
+    <!-- Google Interview Prep Content -->
+    <section class="section">
+        <div class="section-wrap">
+            <div class="section-lead">
+                <h2>My <span class="gradient-text">Google</span> Preparation Strategy</h2>
+                <p>Joining Google as a software engineer is one of my career goals. I've developed a focused preparation plan specifically targeting Google's rigorous interview process. Here's my approach to preparing for Google technical interviews.</p>
+            </div>
+            
+            <div class="interview-company-large google-interview-large">
+                <h3 class="gradient-text">Technical Interview Focus Areas</h3>
+                
+                <div class="detailed-topics">
+                    <div class="detailed-topic-card">
+                        <h4><i class="fas fa-code"></i> Data Structures & Algorithms</h4>
+                        <ul>
+                            <li><i class="fas fa-check-circle"></i> Advanced Algorithm Analysis</li>
+                            <li><i class="fas fa-check-circle"></i> Complexity Optimization</li>
+                            <li><i class="fas fa-check-circle"></i> Distributed Algorithms</li>
+                            <li><i class="fas fa-check-circle"></i> Memory-Efficient Solutions</li>
+                            <li><i class="fas fa-check-circle"></i> Hard LeetCode Problems</li>
+                            <li><i class="fas fa-check-circle"></i> Competitive Programming</li>
+                            <li><i class="fas fa-check-circle"></i> Edge Case Handling</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="detailed-topic-card">
+                        <h4><i class="fas fa-sitemap"></i> System Design</h4>
+                        <ul>
+                            <li><i class="fas fa-check-circle"></i> Google-Scale Systems</li>
+                            <li><i class="fas fa-check-circle"></i> Distributed Computing</li>
+                            <li><i class="fas fa-check-circle"></i> High-Volume Data Processing</li>
+                            <li><i class="fas fa-check-circle"></i> Google Cloud Architecture</li>
+                            <li><i class="fas fa-check-circle"></i> Real-Time Processing</li>
+                            <li><i class="fas fa-check-circle"></i> Globally Distributed Systems</li>
+                            <li><i class="fas fa-check-circle"></i> Reliable System Design</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="detailed-topic-card">
+                        <h4><i class="fas fa-cogs"></i> Google Technologies</h4>
+                        <ul>
+                            <li><i class="fas fa-check-circle"></i> Google Cloud Platform</li>
+                            <li><i class="fas fa-check-circle"></i> Angular & Firebase</li>
+                            <li><i class="fas fa-check-circle"></i> TensorFlow & ML APIs</li>
+                            <li><i class="fas fa-check-circle"></i> Protocol Buffers</li>
+                            <li><i class="fas fa-check-circle"></i> Google Maps API</li>
+                            <li><i class="fas fa-check-circle"></i> Progressive Web Apps</li>
+                            <li><i class="fas fa-check-circle"></i> Google APIs Integration</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="detailed-topic-card">
+                        <h4><i class="fas fa-people-carry"></i> Googliness & Leadership</h4>
+                        <ul>
+                            <li><i class="fas fa-check-circle"></i> User-Focused Thinking</li>
+                            <li><i class="fas fa-check-circle"></i> Innovation & Creativity</li>
+                            <li><i class="fas fa-check-circle"></i> Data-Driven Decision Making</li>
+                            <li><i class="fas fa-check-circle"></i> Bias for Action</li>
+                            <li><i class="fas fa-check-circle"></i> Leadership & Mentorship</li>
+                            <li><i class="fas fa-check-circle"></i> Collaboration Skills</li>
+                            <li><i class="fas fa-check-circle"></i> Adaptability & Learning</li>
+                        </ul>
+                    </div>
+                </div>
+                
+                <div class="company-resources">
+                    <h3><i class="fas fa-book"></i> Google Interview Resources</h3>
+                    
+                    <div class="resource-list">
+                        <div class="resource-item">
+                            <h4><i class="fas fa-laptop-code"></i> AlgoExpert</h4>
+                            <p>Completed all Google-tagged problems on AlgoExpert, focusing on space and time complexity optimization that Google values in their coding interviews.</p>
+                            <span class="resource-link">
+                                <i class="fas fa-external-link-alt"></i> Subscription Resource
+                            </span>
+                        </div>
+                        
+                        <div class="resource-item">
+                            <h4><i class="fas fa-graduation-cap"></i> Google Tech Dev Guide</h4>
+                            <p>Working through Google's official technical development guide which includes coding challenges, system design concepts, and career development resources.</p>
+                            <a href="https://techdevguide.withgoogle.com/" target="_blank" rel="noopener noreferrer" class="resource-link">
+                                <i class="fas fa-external-link-alt"></i> Visit Resource
+                            </a>
+                        </div>
+                        
+                        <div class="resource-item">
+                            <h4><i class="fas fa-book"></i> Designing Data-Intensive Applications</h4>
+                            <p>Studying this book to understand large-scale system design concepts that are particularly relevant to Google's global distributed systems.</p>
+                            <span class="resource-link">
+                                <i class="fas fa-external-link-alt"></i> Book Resource
+                            </span>
+                        </div>
+                        
+                        <div class="resource-item">
+                            <h4><i class="fas fa-users"></i> Google Mock Interviews</h4>
+                            <p>Practicing with former Google interviewers on platforms like interviewing.io to get authentic interview experience and feedback on my approach.</p>
+                            <span class="resource-link">
+                                <i class="fas fa-external-link-alt"></i> Practice Resource
+                            </span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Call to Action -->
+            <div class="interview-prep-footer" style="text-align: center; margin-top: 4rem; padding-top: 2rem; border-top: 1px solid rgba(255, 255, 255, 0.1);">
+                <p>I'm actively preparing for opportunities at Microsoft and Google while continuously improving my skills to meet and exceed the standards of these top tech companies.</p>
+                <a href="/" class="btn btn-primary" style="display: inline-flex; align-items: center; gap: 0.5rem; margin-top: 1rem;">
+                    <i class="fas fa-arrow-left"></i>
+                    <span>Return to Portfolio</span>
+                </a>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Footer -->
+    <footer class="footer" style="margin-top: 4rem;">
+        <div class="container">
+            <div class="footer-bottom">
+                <p class="copyright">
+                    © <span id="current-year">2025</span> Moeed-ul-Hassan. All rights reserved.
+                </p>
+                <div class="footer-social">
+                    <a href="#" target="_blank" rel="noopener noreferrer">
+                        <i class="fab fa-github"></i>
+                    </a>
+                    <a href="#" target="_blank" rel="noopener noreferrer">
+                        <i class="fab fa-linkedin"></i>
+                    </a>
+                    <a href="#" target="_blank" rel="noopener noreferrer">
+                        <i class="fab fa-twitter"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </footer>
+    
+    <!-- Add a link to the MS & Google prep page in your index.html -->
+    <script>
+        // Set current year in footer
+        document.getElementById('current-year').textContent = new Date().getFullYear();
+        
+        // Add animations
+        document.addEventListener('DOMContentLoaded', function() {
+            // Animate detailed topic cards when they come into view
+            const topicCards = document.querySelectorAll('.detailed-topic-card');
+            
+            function animateCards() {
+                topicCards.forEach(card => {
+                    const cardTop = card.getBoundingClientRect().top;
+                    const windowHeight = window.innerHeight;
+                    
+                    if (cardTop < windowHeight - 50) {
+                        card.style.opacity = '1';
+                        card.style.transform = 'translateY(0)';
+                    }
+                });
+            }
+            
+            // Set initial state
+            topicCards.forEach(card => {
+                card.style.opacity = '0';
+                card.style.transform = 'translateY(20px)';
+                card.style.transition = 'all 0.5s ease';
+            });
+            
+            // Check on scroll
+            window.addEventListener('scroll', animateCards);
+            
+            // Initial check
+            setTimeout(animateCards, 500);
+        });
+    </script>
+</body>
+</html>
