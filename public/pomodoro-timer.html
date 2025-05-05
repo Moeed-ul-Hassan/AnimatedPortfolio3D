@@ -1,0 +1,340 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pomodoro Timer for Coding Practice | Microsoft & Google Interview Prep</title>
+    
+    <!-- Meta tags for better SEO -->
+    <meta name="description" content="An effective coding practice timer using the Pomodoro Technique to help you prepare for Microsoft and Google technical interviews.">
+    <meta name="keywords" content="coding timer, pomodoro technique, Microsoft interview prep, Google interview prep, coding practice, technical interview, focus timer">
+    
+    <!-- Favicon -->
+    <link rel="icon" href="/assets/favicon.png" type="image/png">
+    
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&family=Roboto+Mono:wght@400;700&display=swap" rel="stylesheet">
+    
+    <!-- Font Awesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- Stylesheets -->
+    <link rel="stylesheet" href="/css/pomodoro-timer.css">
+    <link rel="stylesheet" href="/style.css">
+    
+    <style>
+        /* Additional page styles */
+        .page-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+        
+        .page-header {
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+        
+        .page-header h1 {
+            font-size: 2.5rem;
+            color: #ffffff;
+            margin-bottom: 1rem;
+        }
+        
+        .page-header p {
+            max-width: 800px;
+            margin: 0 auto;
+            color: rgba(255, 255, 255, 0.8);
+            font-size: 1.1rem;
+            line-height: 1.6;
+        }
+        
+        .benefits-container {
+            background-color: rgba(25, 25, 35, 0.7);
+            border-radius: 20px;
+            padding: 2rem;
+            margin-top: 3rem;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+        }
+        
+        .benefits-title {
+            text-align: center;
+            margin-bottom: 2rem;
+            color: #ffffff;
+        }
+        
+        .benefits-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1.5rem;
+        }
+        
+        .benefit-card {
+            background: linear-gradient(135deg, rgba(255, 255, 255, 0.05), rgba(255, 255, 255, 0.1));
+            border-radius: 15px;
+            padding: 1.5rem;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+        }
+        
+        .benefit-card i {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+            color: var(--pomodoro-focus-color);
+        }
+        
+        .benefit-card h3 {
+            font-size: 1.2rem;
+            margin-bottom: 0.75rem;
+            color: #ffffff;
+        }
+        
+        .benefit-card p {
+            color: rgba(255, 255, 255, 0.8);
+            line-height: 1.5;
+            font-size: 0.95rem;
+        }
+        
+        .back-link {
+            display: inline-block;
+            margin-top: 2rem;
+            color: #ffffff;
+            text-decoration: none;
+            padding: 0.75rem 1.5rem;
+            border-radius: 8px;
+            background-color: rgba(255, 255, 255, 0.1);
+            transition: all 0.3s;
+        }
+        
+        .back-link:hover {
+            background-color: rgba(255, 255, 255, 0.2);
+            transform: translateY(-2px);
+        }
+        
+        @media (max-width: 768px) {
+            .page-container {
+                padding: 1.5rem;
+            }
+            
+            .page-header h1 {
+                font-size: 2rem;
+            }
+            
+            .benefits-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="page-container">
+        <header class="page-header">
+            <h1>Pomodoro Coding Timer</h1>
+            <p>Optimize your coding practice with this powerful Pomodoro timer designed specifically for technical interview preparation. Balance focused coding sessions with strategic breaks to maximize learning retention and problem-solving abilities.</p>
+        </header>
+        
+        <main>
+            <!-- Pomodoro Timer -->
+            <div class="pomodoro-container">
+                <div class="pomodoro-header">
+                    <h2><i class="fas fa-clock"></i> Pomodoro Timer</h2>
+                    <div class="pomodoro-controls-secondary">
+                        <button id="pomodoro-stats-button" title="View Stats">
+                            <i class="fas fa-chart-bar"></i>
+                        </button>
+                        <button id="pomodoro-settings-button" title="Settings">
+                            <i class="fas fa-cog"></i>
+                        </button>
+                    </div>
+                </div>
+                
+                <div class="pomodoro-timer focus">
+                    <div id="timer-label">Focus Time</div>
+                    <div id="timer-display">25:00</div>
+                    <div class="timer-progress-container">
+                        <div id="timer-progress"></div>
+                    </div>
+                </div>
+                
+                <div class="timer-type-buttons">
+                    <button id="timer-type-focus" class="timer-type-button active">
+                        <i class="fas fa-code"></i> Focus
+                    </button>
+                    <button id="timer-type-short-break" class="timer-type-button">
+                        <i class="fas fa-coffee"></i> Short Break
+                    </button>
+                    <button id="timer-type-long-break" class="timer-type-button">
+                        <i class="fas fa-couch"></i> Long Break
+                    </button>
+                </div>
+                
+                <div class="pomodoro-controls-primary">
+                    <button id="pomodoro-start">
+                        <i class="fas fa-play"></i>
+                        <span>Start</span>
+                    </button>
+                    <button id="pomodoro-reset">
+                        <i class="fas fa-redo-alt"></i>
+                        <span>Reset</span>
+                    </button>
+                    <button id="pomodoro-skip">
+                        <i class="fas fa-forward"></i>
+                        <span>Skip</span>
+                    </button>
+                </div>
+                
+                <!-- Settings Panel -->
+                <div id="pomodoro-settings">
+                    <div class="settings-header">
+                        <h3>Timer Settings</h3>
+                        <button class="settings-close" id="settings-close">
+                            <i class="fas fa-times"></i>
+                        </button>
+                    </div>
+                    
+                    <form id="pomodoro-settings-form">
+                        <div class="settings-form-row">
+                            <div class="settings-form-group">
+                                <label for="setting-focus-time">Focus Time (minutes)</label>
+                                <input type="number" id="setting-focus-time" min="1" max="60" value="25">
+                            </div>
+                            
+                            <div class="settings-form-group">
+                                <label for="setting-short-break">Short Break (minutes)</label>
+                                <input type="number" id="setting-short-break" min="1" max="30" value="5">
+                            </div>
+                        </div>
+                        
+                        <div class="settings-form-row">
+                            <div class="settings-form-group">
+                                <label for="setting-long-break">Long Break (minutes)</label>
+                                <input type="number" id="setting-long-break" min="1" max="60" value="15">
+                            </div>
+                            
+                            <div class="settings-form-group">
+                                <label for="setting-long-break-after">Long Break After (pomodoros)</label>
+                                <input type="number" id="setting-long-break-after" min="1" max="10" value="4">
+                            </div>
+                        </div>
+                        
+                        <div class="settings-form-group">
+                            <label>
+                                <input type="checkbox" id="setting-auto-breaks" checked>
+                                Auto-start breaks
+                            </label>
+                        </div>
+                        
+                        <div class="settings-form-group">
+                            <label>
+                                <input type="checkbox" id="setting-auto-pomodoros">
+                                Auto-start pomodoros
+                            </label>
+                        </div>
+                        
+                        <div class="settings-form-group">
+                            <label>
+                                <input type="checkbox" id="setting-sound" checked>
+                                Play sounds
+                            </label>
+                        </div>
+                        
+                        <button type="submit" class="settings-save">Save Settings</button>
+                    </form>
+                </div>
+                
+                <!-- Stats Panel -->
+                <div id="pomodoro-stats-panel">
+                    <div class="stats-header">
+                        <h3>Your Productivity Stats</h3>
+                        <button class="stats-close" id="stats-close">
+                            <i class="fas fa-times"></i>
+                        </button>
+                    </div>
+                    
+                    <div class="stats-container">
+                        <div class="stats-card">
+                            <h4>Total Focus Time</h4>
+                            <p id="stats-total-focus-time">0h 0m</p>
+                        </div>
+                        
+                        <div class="stats-card">
+                            <h4>Today's Focus Time</h4>
+                            <p id="stats-today-focus-time">0h 0m</p>
+                        </div>
+                        
+                        <div class="stats-card">
+                            <h4>Sessions Completed</h4>
+                            <p id="stats-sessions-completed">0</p>
+                        </div>
+                        
+                        <div class="stats-card">
+                            <h4>Current Streak</h4>
+                            <p id="stats-current-streak">0</p>
+                        </div>
+                        
+                        <div class="stats-card">
+                            <h4>Longest Streak</h4>
+                            <p id="stats-longest-streak">0</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Benefits of Pomodoro -->
+            <div class="benefits-container">
+                <h2 class="benefits-title">Benefits for Technical Interview Preparation</h2>
+                
+                <div class="benefits-grid">
+                    <div class="benefit-card">
+                        <i class="fas fa-brain"></i>
+                        <h3>Improved Focus</h3>
+                        <p>Short focused sessions help maintain high concentration while solving complex coding problems, essential for algorithmic challenges in Microsoft and Google interviews.</p>
+                    </div>
+                    
+                    <div class="benefit-card">
+                        <i class="fas fa-stopwatch"></i>
+                        <h3>Time Management</h3>
+                        <p>Practice managing your time effectively, a critical skill for timed coding interviews where solutions must be developed within strict time constraints.</p>
+                    </div>
+                    
+                    <div class="benefit-card">
+                        <i class="fas fa-lightbulb"></i>
+                        <h3>Problem-Solving Stamina</h3>
+                        <p>Build mental endurance for tackling multiple interview rounds with breaks that prevent burnout and maintain peak cognitive performance.</p>
+                    </div>
+                    
+                    <div class="benefit-card">
+                        <i class="fas fa-chart-line"></i>
+                        <h3>Track Progress</h3>
+                        <p>Monitor your productivity and see improvements over time as you prepare for your Microsoft and Google interviews.</p>
+                    </div>
+                </div>
+            </div>
+            
+            <div style="text-align: center; margin-top: 2rem;">
+                <a href="/ms-google-prep.html" class="back-link">
+                    <i class="fas fa-arrow-left"></i> Back to Microsoft & Google Prep
+                </a>
+            </div>
+        </main>
+    </div>
+    
+    <!-- JavaScript -->
+    <script src="/js/pomodoro-timer.js"></script>
+    <script>
+        // Handle settings close button
+        document.getElementById('settings-close').addEventListener('click', () => {
+            document.getElementById('pomodoro-settings').classList.remove('visible');
+        });
+        
+        // Handle stats close button
+        document.getElementById('stats-close').addEventListener('click', () => {
+            document.getElementById('pomodoro-stats-panel').classList.remove('visible');
+        });
+    </script>
+</body>
+</html>
