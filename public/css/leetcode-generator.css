@@ -315,3 +315,101 @@
         justify-content: center;
     }
 }
+
+/* Language selector and code blocks styles */
+.problem-solution {
+    margin: 1.5rem 0;
+    background-color: rgba(255, 255, 255, 0.03);
+    border-radius: var(--border-radius-md);
+    padding: 1.5rem;
+    border: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.solution-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1rem;
+}
+
+.solution-header h4 {
+    margin: 0;
+    font-size: 1.1rem;
+    color: var(--color-text);
+}
+
+.language-selector-container {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+}
+
+.language-selector-container label {
+    font-size: 0.9rem;
+    color: var(--color-text-secondary);
+}
+
+#language-selector {
+    padding: 0.35rem 0.75rem;
+    background-color: rgba(255, 255, 255, 0.08);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: var(--border-radius-sm);
+    color: var(--color-text);
+    font-size: 0.9rem;
+    font-family: var(--font-code);
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+#language-selector:hover {
+    background-color: rgba(255, 255, 255, 0.12);
+}
+
+#language-selector:focus {
+    outline: none;
+    border-color: var(--color-primary);
+}
+
+.code-block {
+    font-family: var(--font-code);
+    background-color: rgba(0, 0, 0, 0.2);
+    border-radius: var(--border-radius-sm);
+    padding: 1.25rem;
+    margin: 0;
+    position: relative;
+    overflow-x: auto;
+    white-space: pre;
+    font-size: 0.9rem;
+    line-height: 1.5;
+}
+
+/* Language-specific styling */
+.code-block.javascript {
+    border-left: 3px solid #f7df1e; /* JavaScript yellow */
+}
+
+.code-block.python {
+    border-left: 3px solid #306998; /* Python blue */
+}
+
+.code-block.java {
+    border-left: 3px solid #b07219; /* Java brown */
+}
+
+.code-block.csharp {
+    border-left: 3px solid #178600; /* C# green */
+}
+
+.code-block.cpp {
+    border-left: 3px solid #f34b7d; /* C++ pink */
+}
+
+.solution-note {
+    margin-top: 1rem;
+    font-size: 0.85rem;
+    color: var(--color-text-secondary);
+    background-color: rgba(255, 255, 255, 0.04);
+    padding: 0.75rem 1rem;
+    border-radius: var(--border-radius-sm);
+    border-left: 3px solid var(--color-primary-light);
+}
