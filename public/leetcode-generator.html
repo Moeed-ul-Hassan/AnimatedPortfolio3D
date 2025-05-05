@@ -204,6 +204,34 @@
                 <div class="leetcode-header">
                     <h2>Generate a Random Problem</h2>
                     <p>Select a difficulty level or specific company focus to generate a random LeetCode problem for practice.</p>
+                    
+                    <!-- Mini Pomodoro Timer and Controls -->
+                    <div class="mini-tools-container">
+                        <div class="mini-pomodoro">
+                            <div class="mini-timer">
+                                <span id="mini-timer-display">25:00</span>
+                                <div class="mini-timer-progress">
+                                    <div id="mini-timer-bar"></div>
+                                </div>
+                            </div>
+                            <div class="mini-timer-controls">
+                                <button id="mini-timer-start" title="Start/Pause Timer">
+                                    <i class="fas fa-play"></i>
+                                </button>
+                                <button id="mini-timer-reset" title="Reset Timer">
+                                    <i class="fas fa-redo-alt"></i>
+                                </button>
+                                <a href="/pomodoro-timer.html" target="_blank" title="Open Full Timer" class="mini-timer-link">
+                                    <i class="fas fa-external-link-alt"></i>
+                                </a>
+                            </div>
+                        </div>
+                        
+                        <button id="refresh-problem" class="refresh-problem-btn" title="Generate New Problem">
+                            <i class="fas fa-sync-alt"></i>
+                            <span>New Problem</span>
+                        </button>
+                    </div>
                 </div>
                 
                 <div class="difficulty-controls">
@@ -300,10 +328,16 @@
             <!-- Footer Section -->
             <div class="ms-google-footer">
                 <p>Continue your preparation with more Microsoft and Google interview resources.</p>
-                <a href="/ms-google-prep.html" class="btn btn-primary">
-                    <i class="fas fa-arrow-left"></i>
-                    <span>Back to Interview Prep</span>
-                </a>
+                <div style="display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap; margin-top: 1.5rem;">
+                    <a href="/ms-google-prep.html" class="btn btn-primary">
+                        <i class="fas fa-arrow-left"></i>
+                        <span>Back to Interview Prep</span>
+                    </a>
+                    <a href="https://buymeacoffee.com/Moeed-ul-Hassan" target="_blank" class="btn btn-secondary coffee-btn">
+                        <i class="fas fa-coffee"></i>
+                        <span>Buy Me a Coffee</span>
+                    </a>
+                </div>
             </div>
         </section>
     </div>
@@ -337,6 +371,108 @@
                 stagger: 0.1,
                 delay: 0.5,
                 ease: "power3.out"
+            });
+            
+            // Mini Pomodoro Timer functionality
+            const miniTimer = {
+                duration: 25 * 60, // 25 minutes in seconds
+                remaining: 25 * 60,
+                interval: null,
+                isRunning: false,
+                isPaused: false,
+                
+                updateDisplay: function() {
+                    const minutes = Math.floor(this.remaining / 60);
+                    const seconds = this.remaining % 60;
+                    
+                    document.getElementById('mini-timer-display').textContent = 
+                        `${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
+                    
+                    // Update progress bar
+                    const progress = 100 - (this.remaining / this.duration * 100);
+                    document.getElementById('mini-timer-bar').style.width = `${progress}%`;
+                },
+                
+                start: function() {
+                    if (this.isRunning && !this.isPaused) {
+                        // Pause timer
+                        this.isPaused = true;
+                        clearInterval(this.interval);
+                        document.getElementById('mini-timer-start').innerHTML = '<i class="fas fa-play"></i>';
+                    } else if (this.isRunning && this.isPaused) {
+                        // Resume timer
+                        this.isPaused = false;
+                        this.interval = setInterval(() => this.tick(), 1000);
+                        document.getElementById('mini-timer-start').innerHTML = '<i class="fas fa-pause"></i>';
+                    } else {
+                        // Start timer
+                        this.isRunning = true;
+                        this.interval = setInterval(() => this.tick(), 1000);
+                        document.getElementById('mini-timer-start').innerHTML = '<i class="fas fa-pause"></i>';
+                    }
+                },
+                
+                reset: function() {
+                    clearInterval(this.interval);
+                    this.isRunning = false;
+                    this.isPaused = false;
+                    this.remaining = this.duration;
+                    this.updateDisplay();
+                    document.getElementById('mini-timer-start').innerHTML = '<i class="fas fa-play"></i>';
+                },
+                
+                tick: function() {
+                    if (this.remaining <= 0) {
+                        // Timer completed
+                        this.playSound();
+                        this.reset();
+                        return;
+                    }
+                    
+                    this.remaining--;
+                    this.updateDisplay();
+                },
+                
+                playSound: function() {
+                    try {
+                        const audioContext = new (window.AudioContext || window.webkitAudioContext)();
+                        const oscillator = audioContext.createOscillator();
+                        const gainNode = audioContext.createGain();
+                        
+                        oscillator.connect(gainNode);
+                        gainNode.connect(audioContext.destination);
+                        
+                        oscillator.frequency.value = 880;
+                        oscillator.type = 'sine';
+                        
+                        gainNode.gain.value = 0.5;
+                        
+                        oscillator.start();
+                        
+                        setTimeout(() => {
+                            oscillator.stop();
+                        }, 500);
+                    } catch (e) {
+                        console.log('Sound could not be played');
+                    }
+                }
+            };
+            
+            // Initialize mini timer display
+            miniTimer.updateDisplay();
+            
+            // Set up event listeners for mini timer
+            document.getElementById('mini-timer-start').addEventListener('click', () => {
+                miniTimer.start();
+            });
+            
+            document.getElementById('mini-timer-reset').addEventListener('click', () => {
+                miniTimer.reset();
+            });
+            
+            // Refresh problem button functionality
+            document.getElementById('refresh-problem').addEventListener('click', () => {
+                generateNewProblem(currentDifficulty);
             });
         });
     </script>
