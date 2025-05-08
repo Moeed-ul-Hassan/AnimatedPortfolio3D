@@ -478,5 +478,36 @@ document.addEventListener("DOMContentLoaded", () => {
             // Reset form
             contactForm.reset();
         });
-    }
+    }// JavaScript to fix the mobile menu
+document.addEventListener('DOMContentLoaded', function() {
+    const mobileMenuBtn = document.querySelector('.mobile-menu-btn');
+    const mobileMenu = document.querySelector('.mobile-menu');
+    
+    // Initially hide the mobile menu
+    mobileMenu.style.display = 'none';
+    
+    // Toggle mobile menu on button click
+    mobileMenuBtn.addEventListener('click', function() {
+        if (mobileMenu.style.display === 'none') {
+            mobileMenu.style.display = 'flex';
+        } else {
+            mobileMenu.style.display = 'none';
+        }
+    });
+    
+    // Close mobile menu when clicking on a menu item
+    const mobileMenuLinks = mobileMenu.querySelectorAll('.nav-link');
+    mobileMenuLinks.forEach(link => {
+        link.addEventListener('click', function() {
+            mobileMenu.style.display = 'none';
+        });
+    });
+    
+    // Close mobile menu when resizing to desktop
+    window.addEventListener('resize', function() {
+        if (window.innerWidth >= 768) {
+            mobileMenu.style.display = 'none';
+        }
+    });
+});
 });
